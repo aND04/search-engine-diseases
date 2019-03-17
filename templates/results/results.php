@@ -5,12 +5,7 @@
 
         $pubmed = new PubmedData($_GET['medical-specialty']);
         $pubmed->saveDiseasesToFile();
-        foreach ($pubmed->getFileContents() as $id) {
-            if (strlen($id) > 0) {
-                $url = $pubmed->getPubmedTitle($id);
-                echo '<pre><a href="' . $url . '">' . $url . '</a></pre>';
-            }
-        }
+        /*echo '<pre>' . print_r($pubmed->diseaseTitleAbstractMap) . '</pre>';*/
         ?>
     </div>
 </div>
