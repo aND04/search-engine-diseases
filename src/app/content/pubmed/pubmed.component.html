@@ -1,0 +1,9 @@
+<h2>{{disease}}</h2>
+<mat-card *ngFor="let title of titles; let i = index"  style="word-wrap: break-word !important;">
+  <mat-form-field>
+    <input matInput placeholder="title" readonly [ngModel]="title" name="title">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea cdkTextareaAutosize matInput placeholder="Abstract" name="abstract-{{i}}" [ngModel]="abstracts[i]" readonly></textarea>
+  </mat-form-field>
+</mat-card>
