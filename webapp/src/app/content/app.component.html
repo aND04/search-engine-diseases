@@ -1,0 +1,29 @@
+<mat-toolbar class="app-toolbar" color="primary">
+  <mat-toolbar-row>
+    <span>Custom Toolbar</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container class="app-container">
+  <mat-sidenav [disableClose]="true" [opened]="true" mode="side">
+    <div class="row">
+      <div class="col s12">
+        <button [routerLink]="'pubmed'" mat-button>Pubmed</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <button [routerLink]="'flickr'" mat-button>Flickr</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <button [routerLink]="'twitter'" mat-button>Twitter</button>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-dbpedia></app-dbpedia>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

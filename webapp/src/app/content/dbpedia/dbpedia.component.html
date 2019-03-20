@@ -1,0 +1,23 @@
+<mat-card>
+  <form (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col s10">
+        <mat-form-field>
+          <mat-placeholder>Medical Specialty</mat-placeholder>
+          <input matInput name="medical-specialty" [(ngModel)]="medicalSpecialty">
+        </mat-form-field>
+      </div>
+      <div class="col s2">
+        <button mat-button type="submit">
+          Submit <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card *ngIf="diseases.length > 0">
+  <div *ngFor="let disease of diseases">
+    <button mat-button type="button" (click)="onClick(disease)">{{disease}}</button>
+  </div>
+</mat-card>
