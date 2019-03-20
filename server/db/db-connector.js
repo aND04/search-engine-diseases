@@ -1,6 +1,7 @@
 const mariadb = require('mariadb');
 
 const pool = mariadb.createPool({
+    // host: localhost,
     host: 'appserver.alunos.di.fc.ul.pt',
     user: 'aw002',
     password: 'aw002',
@@ -20,6 +21,6 @@ module.exports = {
         const conn = await connection();
         const queryExecution = await conn.query(query, values);
         await conn.end();
-        return queryExecution.insertId;
+        return queryExecution;
     }
 };
