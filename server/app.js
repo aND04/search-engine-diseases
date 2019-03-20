@@ -43,7 +43,7 @@ http(`http://dbpedia.org/sparql/?default-graph-uri=http%3A%2F%2Fdbpedia.org&quer
     console.error(err);
 }).then(async (diseases) => {
     console.log(diseases);
-    const insertId = await dbConnector.query("INSERT INTO dbpedia_medical_specialty(description) value (?)", [medicalSpecialty]);
+    const insertId = await dbConnector.query(`INSERT INTO dbpedia_medical_specialty(description) value ('${medicalSpecialty}')`);
     diseases.forEach(async (disease) => {
         await dbConnector.query(`INSERT INTO dbpedia_disease(description, medical_specialty_id) values ('${disease}',${insertId})`);
     });
