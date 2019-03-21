@@ -61,7 +61,7 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
             access_token_secret: 'r2tyX11bPkWxsUBQQtma316HhhD3Yc2woqyBTZJpj3Haz'
         });
         const params = {screen_name: 'nodejs'};
-        const tweets = await twitterClient.get(`/search/tweets.json?q=${'Cardiomyopathy'}&result_type=popular`, params);
+        const tweets = await twitterClient.get(`/search/tweets.json?q=${disease}&result_type=popular`, params);
 
         for (const tweet of tweets['statuses']) {
             let url = `https://twitter.com/statuses/${tweet['id_str']}`;
