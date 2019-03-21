@@ -9,8 +9,8 @@ const getPhotoId = async function (flickr_id) {
 const savePhotoToDb = async function(url, title, flickr_id, diseaseId) {
     const id = await getPhotoId(flickr_id);
     if (id === -1) {
-        const title = stringUtils.sanitize(!!title ? title : '');
-        const queryResult = await dbConnector.query(`INSERT INTO flickr_photo(flickr_id, url, title) VALUES (${flickr_id}, '${url}', '${title}')`);
+        const localTitle = await stringUtils.sanitize(title);
+        const queryResult = await dbConnector.query(`INSERT INTO flickr_photo(flickr_id, url, title) VALUES (${flickr_id}, '${url}', '${localTitle}')`);
         const photoId = queryResult.insertId;
         await dbConnector.query(`INSERT INTO flickr_photo_dbpedia_disease(flickr_photo_id, dbpedia_disease_id) VALUES (${photoId}, ${diseaseId})`);
     } else {

@@ -45,6 +45,9 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
     const insertedId = await dbpediaService.saveMedicalSpecialtyToDb(medicalSpecialty);
     await dbpediaService.saveDiseasesToDb(diseases, insertedId);
     for (const disease of diseases) {
+        /**
+         * Pubmed
+         */
         let diseaseId = await http(endpointUtils.pubmedArticleIds(disease)).then(async (res) => {
             const diseaseId = await dbpediaService.getDiseaseId(disease);
             const articleIds = await xmlUtils.xpathFromXmlString(res, '//Id');
@@ -58,19 +61,21 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
             }
             return diseaseId;
         });
-        await http(endpointUtils.flickrEndpoint(disease)).then(async (res) => {
-            const farmIds = await xmlUtils.xpathFromXmlString(res, '//@farm');
-            const serverIds = await xmlUtils.xpathFromXmlString(res, '//@server');
-            const photoIds = await xmlUtils.xpathFromXmlString(res, '//@id');
-            const secretIds = await xmlUtils.xpathFromXmlString(res, '//@secret');
-            const titles = await xmlUtils.xpathFromXmlString(res, '//@title');
-            const length = farmIds.length;
+        /**
+         * Flickr
+         */
+        const flickrCallResult = await http(endpointUtils.flickrEndpoint(disease));
+        const titles = await xmlUtils.xpathFromXmlString(flickrCallResult, '//@title');
+        const farmIds = await xmlUtils.xpathFromXmlString(flickrCallResult, '//@farm');
+        const serverIds = await xmlUtils.xpathFromXmlString(flickrCallResult, '//@server');
+        const photoIds = await xmlUtils.xpathFromXmlString(flickrCallResult, '//@id');
+        const secretIds = await xmlUtils.xpathFromXmlString(flickrCallResult, '//@secret');
+        const length = farmIds.length;
 
-            for (let i = 0; i < length; i++) {
-                let url = `https://farm${farmIds[i]}.staticflickr.com/${serverIds[i]}/${photoIds[i]}_${secretIds[i]}.jpg`;
-                await flickrService.savePhotoToDb(url, titles[i], photoIds[i], diseaseId);
-            }
-        });
+        for (let i = 0; i < length; i++) {
+            let url = `https://farm${farmIds[i]}.staticflickr.com/${serverIds[i]}/${photoIds[i]}_${secretIds[i]}.jpg`;
+            await flickrService.savePhotoToDb(url, titles[i], photoIds[i], diseaseId);
+        }
     }
 }).then(() => process.exit());
 
