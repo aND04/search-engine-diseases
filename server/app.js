@@ -1,35 +1,6 @@
-/*import express from 'express';
-
-const app = express();
+const http = require('request-promise');
 const Twitter = require('twitter');
 
-app.get('/api/v1/tweet/:topic', (req, res) => {
-    const topic = req.param.topic;
-
-    const twitterClient = new Twitter({
-        consumer_key: '8wSUS1FdrNyuXKfEnPuOFLOsG',
-        consumer_secret: 'hSpiUUP437InwZe99z9ZJgW57nA556likYQddLUhSCbr0aQwpY',
-        access_token_key: '1106575409121034240-s0zdj6CAnzZ2UBFui83NAAy26YA77t',
-        access_token_secret: 'r2tyX11bPkWxsUBQQtma316HhhD3Yc2woqyBTZJpj3Haz'
-    });
-
-    var params = {screen_name: 'nodejs'};
-    twitterClient.get(`/search/tweets.json?q=${topic}&result_type=popular`, params, function(error, tweets, response) {
-        if (!error) {
-            res.status(200).send(tweets);
-        } else {
-            console.log(error);
-            res.status(500).send(error);
-        }
-    });
-});
-
-const PORT = 5000;
-
-app.listen(PORT, () => {
-    console.log(`server running on port ${PORT}`)
-});*/
-const http = require('request-promise');
 const xmlUtils = require('./utils/xml-utils');
 const endpointUtils = require('./utils/enpoint-utils');
 const dbpediaService = require('./services/dbpedia-service');
@@ -76,6 +47,24 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
             let url = `https://farm${farmIds[i]}.staticflickr.com/${serverIds[i]}/${photoIds[i]}_${secretIds[i]}.jpg`;
             await flickrService.savePhotoToDb(url, titles[i], photoIds[i], diseaseId);
         }
+        /**
+         * Twitter
+         */
+        const twitterClient = new Twitter({
+            consumer_key: '8wSUS1FdrNyuXKfEnPuOFLOsG',
+            consumer_secret: 'hSpiUUP437InwZe99z9ZJgW57nA556likYQddLUhSCbr0aQwpY',
+            access_token_key: '1106575409121034240-s0zdj6CAnzZ2UBFui83NAAy26YA77t',
+            access_token_secret: 'r2tyX11bPkWxsUBQQtma316HhhD3Yc2woqyBTZJpj3Haz'
+        });
+        const params = {screen_name: 'nodejs'};
+        const tweets = await twitterClient.get(`/search/tweets.json?q=${disease}&result_type=popular`, params, async function(error, tweets, response) {
+            if (!error) {
+                console.log(tweets);
+                return tweets;
+            } else {
+                console.error(error);
+            }
+        });
     }
 }).then(() => process.exit());
 
