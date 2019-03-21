@@ -1,10 +1,12 @@
 const dbConnector = require('../db/db-connector');
+const stringUtils = require('../utils/string-utils');
 
 const saveDiseasesToDb = async function (diseases, medicalSpecialtyId) {
     for (const disease of diseases) {
-        const id = await getDiseaseId(disease);
+        let sanitizedDescription = stringUtils.sanitize(disease);
+        let id = await getDiseaseId(sanitizedDescription);
         if (id === -1) {
-            await dbConnector.query(`INSERT INTO dbpedia_disease(description, medical_specialty_id) values ('${disease}',${medicalSpecialtyId})`);
+            await dbConnector.query(`INSERT INTO dbpedia_disease(description, medical_specialty_id) values ('${sanitizedDescription}',${medicalSpecialtyId})`);
         } else {
             await dbConnector.query(`UPDATE dbpedia_disease SET updated_at = current_timestamp WHERE id = ${id}`);
         }
@@ -23,8 +25,8 @@ const saveMedicalSpecialtyToDb = async function (medicalSpecialty) {
 };
 
 const getDiseaseId = async function (disease) {
-    disease = disease.charAt(0).toUpperCase() + disease.slice(1);
-    const queryResult = await dbConnector.query(`SELECT id FROM dbpedia_disease where description = '${disease}'`);
+    let sanitizedDescription = stringUtils.sanitize(disease);
+    const queryResult = await dbConnector.query(`SELECT id FROM dbpedia_disease where description = '${sanitizedDescription}'`);
     return queryResult[0] ? queryResult[0].id : -1;
 };
 
