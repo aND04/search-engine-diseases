@@ -6,11 +6,15 @@ const endpointUtils = require('./utils/enpoint-utils');
 const dbpediaService = require('./services/dbpedia-service');
 const pubmedService = require('./services/pubmed-service');
 const flickrService = require('./services/flickr-service');
+const twitterService = require('./services/twitter-service');
 
 let medicalSpecialty = process.argv[2];
 if (!medicalSpecialty) throw Error('Please specify a medical specialty field');
 medicalSpecialty = medicalSpecialty.charAt(0).toUpperCase() + medicalSpecialty.slice(1);
 
+/**
+ * Dbpedia
+ */
 http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
     const diseases = xmlUtils.xpathFromXmlString(res, '//*[@name="name"]');
     const insertedId = await dbpediaService.saveMedicalSpecialtyToDb(medicalSpecialty);
@@ -57,15 +61,12 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
             access_token_secret: 'r2tyX11bPkWxsUBQQtma316HhhD3Yc2woqyBTZJpj3Haz'
         });
         const params = {screen_name: 'nodejs'};
-        const tweets = await twitterClient.get(`/search/tweets.json?q=${disease}&result_type=popular`, params, async function(error, tweets, response) {
-            if (!error) {
-                console.log(tweets);
-                return tweets;
-            } else {
-                console.error(error);
-            }
-        });
+        const tweets = await twitterClient.get(`/search/tweets.json?q=${'Cardiomyopathy'}&result_type=popular`, params);
+
+        for (const tweet of tweets['statuses']) {
+            let url = `https://twitter.com/statuses/${tweet['id_str']}`;
+            await twitterService.saveTweetToDb(tweet['id_str'],tweet['text'],tweet['created_at'], url, diseaseId);
+        }
     }
 }).then(() => process.exit());
-
 
