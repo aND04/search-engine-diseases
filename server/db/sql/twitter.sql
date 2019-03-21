@@ -7,7 +7,6 @@ create table twitter_tweet
   tweet_date  varchar(255)  not null,
   created_at  timestamp     not null default current_timestamp,
   updated_at  timestamp,
-  disease_id  bigint(20)    not null,
   primary key (id),
   unique key uk_tweet_id (tweet_id)
 );
