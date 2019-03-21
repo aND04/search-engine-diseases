@@ -10,8 +10,13 @@ const pubmedArticleEndpoint = function (ids) {
     return `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=${ids}&retmode=text&rettype=xml`;
 };
 
+const flickrEndpoint = function (disease) {
+    return `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=2508b7cca5ebc9f8b29f9426e45e05a3&text=${disease}&per_page=10&privacy_filter=1`;
+};
+
 module.exports = {
     dbpedia: dbPediaEndpoint,
     pubmedArticleIds: pubmedArticleIdsEndpoint,
-    pubmedArticle: pubmedArticleEndpoint
+    pubmedArticle: pubmedArticleEndpoint,
+    flickrEndpoint: flickrEndpoint
 };

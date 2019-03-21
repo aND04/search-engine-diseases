@@ -34,17 +34,18 @@ const xmlUtils = require('./utils/xml-utils');
 const endpointUtils = require('./utils/enpoint-utils');
 const dbpediaService = require('./services/dbpedia-service');
 const pubmedService = require('./services/pubmed-service');
+const flickrService = require('./services/flickr-service');
 
 let medicalSpecialty = process.argv[2];
 if (!medicalSpecialty) throw Error('Please specify a medical specialty field');
 medicalSpecialty = medicalSpecialty.charAt(0).toUpperCase() + medicalSpecialty.slice(1);
 
-http(endpointUtils.dbpedia(medicalSpecialty)).then(async function (res) {
+http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
     const diseases = xmlUtils.xpathFromXmlString(res, '//*[@name="name"]');
     const insertedId = await dbpediaService.saveMedicalSpecialtyToDb(medicalSpecialty);
     await dbpediaService.saveDiseasesToDb(diseases, insertedId);
     for (const disease of diseases) {
-        await http(endpointUtils.pubmedArticleIds(disease)).then(async function (res) {
+        let diseaseId = await http(endpointUtils.pubmedArticleIds(disease)).then(async (res) => {
             const diseaseId = await dbpediaService.getDiseaseId(disease);
             const articleIds = await xmlUtils.xpathFromXmlString(res, '//Id');
             const uniqueArticleIds = [...new Set(articleIds)];
@@ -54,6 +55,20 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async function (res) {
                     const abstract = xmlUtils.xpathFromXmlString(res, '//Abstract');
                     await pubmedService.saveArticleToDb(articleId, title, abstract, diseaseId);
                 });
+            }
+            return diseaseId;
+        });
+        await http(endpointUtils.flickrEndpoint(disease)).then(async (res) => {
+            const farmIds = await xmlUtils.xpathFromXmlString(res, '//@farm');
+            const serverIds = await xmlUtils.xpathFromXmlString(res, '//@server');
+            const photoIds = await xmlUtils.xpathFromXmlString(res, '//@id');
+            const secretIds = await xmlUtils.xpathFromXmlString(res, '//@secret');
+            const titles = await xmlUtils.xpathFromXmlString(res, '//@title');
+            const length = farmIds.length;
+
+            for (let i = 0; i < length; i++) {
+                let url = `https://farm${farmIds[i]}.staticflickr.com/${serverIds[i]}/${photoIds[i]}_${secretIds[i]}.jpg`;
+                await flickrService.savePhotoToDb(url, titles[i], photoIds[i], diseaseId);
             }
         });
     }
