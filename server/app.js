@@ -39,15 +39,10 @@ let medicalSpecialty = process.argv[2];
 if (!medicalSpecialty) throw Error('Please specify a medical specialty field');
 medicalSpecialty = medicalSpecialty.charAt(0).toUpperCase() + medicalSpecialty.slice(1);
 
-http(endpointUtils.dbpedia(medicalSpecialty)).then(function (res) {
-    return xmlUtils.xpathFromXmlString(res, '//*[@name="name"]');
-}).catch(function (err) {
-    console.error(err);
-}).then(async (diseases) => {
+http(endpointUtils.dbpedia(medicalSpecialty)).then(async function (res) {
+    const diseases = xmlUtils.xpathFromXmlString(res, '//*[@name="name"]');
     const insertedId = await dbpediaService.saveMedicalSpecialtyToDb(medicalSpecialty);
     await dbpediaService.saveDiseasesToDb(diseases, insertedId);
-    return diseases;
-}).then(async (diseases) => {
     for (const disease of diseases) {
         await http(endpointUtils.pubmedArticleIds(disease)).then(async function (res) {
             const diseaseId = await dbpediaService.getDiseaseId(disease);
