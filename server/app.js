@@ -23,7 +23,7 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
         console.log(`\n\t\tProcessing ${disease}...`);
         let diseaseId = await dbpediaService.getDiseaseId(disease);
         let isDiseaseNew = await dbpediaService.isDiseaseNew(diseaseId);
-        if (isDiseaseNew) {
+
             /**
              * Pubmed
              */
@@ -39,6 +39,7 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
                     });
                 }
             });
+        if (isDiseaseNew) {
             /**
              * Flickr
              */
