@@ -6,7 +6,7 @@ Disease search engine is a nodejs based application to search and display inform
 
 Disease search engine uses a number of open source projects to work properly:
 
-* [node.js] - evented I/O for the backend
+* [node.js](https://nodejs.org/en/) - evented I/O for the backend
 * [Mariadb](https://mariadb.org/) - dbms of choice for the project
 
 Disease search engine is for now a private github repository, but will soon (by the end of semester) be open source.
