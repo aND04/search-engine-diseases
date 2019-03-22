@@ -21,6 +21,7 @@ Disease search engine is for now a private github repository, but will soon (by 
     * open a database manager (mariadb console, heidisql, ...)
     * create database: `CREATE DATABASE aw002;`
     * create user: `CREATE USER aw002@'localhost' IDENTIFIED BY 'aw002';`
+    * `use aw002;`
     * run all the `.sql` files in `/path/to/project/server/db/sql/` 
 * configure application for localhost database:
     * change file `/path/to/project/server/db/db-connector.js:`
