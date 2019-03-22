@@ -3,7 +3,7 @@ create table twitter_tweet
   id          bigint(20)    not null auto_increment,
   tweet_id    varchar(255)  not null,
   url         varchar(255)  not null,
-  description varchar(255)  not null,
+  description varchar(5000) not null,
   tweet_date  varchar(255)  not null,
   created_at  timestamp     not null default current_timestamp,
   updated_at  timestamp,

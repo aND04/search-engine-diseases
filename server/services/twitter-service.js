@@ -11,7 +11,8 @@ const saveTweetToDb = async function (tweetId, description, tweetDate, url, dise
     const id = await getTweetId(tweetId);
     if (id === -1) {
         const sanitizedDescription = await stringUtils.sanitize(description);
-        const queryResult = await dbConnector.query(`INSERT INTO twitter_tweet(tweet_id, url, description, tweet_date) VALUES ('${tweetId}', '${url}', '${sanitizedDescription}', '${tweetDate}')`);
+        const encodedDescription = stringUtils.encodeBase64(sanitizedDescription);
+        const queryResult = await dbConnector.query(`INSERT INTO twitter_tweet(tweet_id, url, description, tweet_date) VALUES ('${tweetId}', '${url}', '${encodedDescription}', '${tweetDate}')`);
         const insertedId = queryResult.insertId;
         await dbConnector.query(`INSERT INTO twitter_tweet_dbpedia_disease(twitter_tweet_id, dbpedia_disease_id) VALUES (${insertedId}, ${diseaseId})`);
     } else {

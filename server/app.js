@@ -20,6 +20,7 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
     const medicalSpecialtyId = await dbpediaService.saveMedicalSpecialtyToDb(medicalSpecialty);
     await dbpediaService.saveDiseasesToDb(diseases, medicalSpecialtyId);
     for (const disease of diseases) {
+        console.log(`\n\t\tProcessing ${disease}...`);
         let diseaseId = await dbpediaService.getDiseaseId(disease);
         let isDiseaseNew = await dbpediaService.isDiseaseNew(diseaseId);
         if (isDiseaseNew) {
@@ -72,4 +73,3 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
         }
     }
 }).then(() => process.exit());
-

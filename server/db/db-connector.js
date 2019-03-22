@@ -1,8 +1,9 @@
 const mariadb = require('mariadb');
 
 const pool = mariadb.createPool({
-    /*host: 'localhost',*/
-    host: 'appserver.alunos.di.fc.ul.pt',
+    host: 'localhost',
+    port: 3307,
+    /*host: 'appserver.alunos.di.fc.ul.pt',*/
     user: 'aw002',
     password: 'aw002',
     database: 'aw002'
