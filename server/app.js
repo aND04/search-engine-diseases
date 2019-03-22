@@ -23,7 +23,7 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
         console.log(`\n\t\tProcessing ${disease}...`);
         let diseaseId = await dbpediaService.getDiseaseId(disease);
         let isDiseaseNew = await dbpediaService.isDiseaseNew(diseaseId);
-
+        if (isDiseaseNew) {
             /**
              * Pubmed
              */
@@ -39,7 +39,6 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
                     });
                 }
             });
-        if (isDiseaseNew) {
             /**
              * Flickr
              */
@@ -55,22 +54,22 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
                 let url = `https://farm${farmIds[i]}.staticflickr.com/${serverIds[i]}/${photoIds[i]}_${secretIds[i]}.jpg`;
                 await flickrService.savePhotoToDb(url, titles[i], photoIds[i], diseaseId);
             }
-            /**
-             * Twitter
-             */
-            const twitterClient = new Twitter({
-                consumer_key: '8wSUS1FdrNyuXKfEnPuOFLOsG',
-                consumer_secret: 'hSpiUUP437InwZe99z9ZJgW57nA556likYQddLUhSCbr0aQwpY',
-                access_token_key: '1106575409121034240-s0zdj6CAnzZ2UBFui83NAAy26YA77t',
-                access_token_secret: 'r2tyX11bPkWxsUBQQtma316HhhD3Yc2woqyBTZJpj3Haz'
-            });
-            const params = {screen_name: 'nodejs'};
-            const tweets = await twitterClient.get(`/search/tweets.json?q=${disease}&result_type=popular`, params);
+        }
+        /**
+         * Twitter
+         */
+        const twitterClient = new Twitter({
+            consumer_key: '8wSUS1FdrNyuXKfEnPuOFLOsG',
+            consumer_secret: 'hSpiUUP437InwZe99z9ZJgW57nA556likYQddLUhSCbr0aQwpY',
+            access_token_key: '1106575409121034240-s0zdj6CAnzZ2UBFui83NAAy26YA77t',
+            access_token_secret: 'r2tyX11bPkWxsUBQQtma316HhhD3Yc2woqyBTZJpj3Haz'
+        });
+        const params = {screen_name: 'nodejs'};
+        const tweets = await twitterClient.get(`/search/tweets.json?q=${disease}&result_type=popular`, params);
 
-            for (const tweet of tweets['statuses']) {
-                let url = `https://twitter.com/statuses/${tweet['id_str']}`;
-                await twitterService.saveTweetToDb(tweet['id_str'],tweet['text'],tweet['created_at'], url, diseaseId);
-            }
+        for (const tweet of tweets['statuses']) {
+            let url = `https://twitter.com/statuses/${tweet['id_str']}`;
+            await twitterService.saveTweetToDb(tweet['id_str'], tweet['text'], tweet['created_at'], url, diseaseId);
         }
     }
 }).then(() => process.exit());
