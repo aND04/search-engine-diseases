@@ -35,7 +35,9 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
                     await http(endpointUtils.pubmedArticle(articleId)).then(async (res) => {
                         const title = xmlUtils.xpathFromXmlString(res, '//ArticleTitle');
                         const abstract = xmlUtils.xpathFromXmlString(res, '//Abstract');
-                        await pubmedService.saveArticleToDb(articleId, title, abstract, diseaseId);
+                        if (abstract.length > 0){
+                            await pubmedService.saveArticleToDb(articleId, title, abstract, diseaseId);
+                        }
                     });
                 }
             });
