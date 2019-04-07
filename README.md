@@ -37,3 +37,16 @@ $ npm install
 $ npm start medical_specialty
 ```
 `medical_specialty` will be the one of choice for the execution of the application.
+
+#### Solve character problem
+``` sh
+ALTER TABLE twitter_tweet_dbpedia_disease CONVERT TO CHARACTER SET utf8;
+ALTER TABLE twitter_tweet CONVERT TO CHARACTER SET utf8;
+ALTER TABLE pubmed_article_dbpedia_disease CONVERT TO CHARACTER SET utf8;
+ALTER TABLE pubmed_article CONVERT TO CHARACTER SET utf8;
+ALTER TABLE flickr_photo_dbpedia_disease CONVERT TO CHARACTER SET utf8;
+ALTER TABLE flickr_photo CONVERT TO CHARACTER SET utf8;
+ALTER TABLE dbpedia_disease CONVERT TO CHARACTER SET utf8;
+ALTER TABLE dbpedia_medical_specialty CONVERT TO CHARACTER SET utf8;
+```
+
