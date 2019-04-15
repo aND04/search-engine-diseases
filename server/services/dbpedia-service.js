@@ -8,7 +8,7 @@ const saveDiseasesToDb = async function (diseases, medicalSpecialtyId) {
         if (id === -1) {
             await dbConnector.query(`INSERT INTO dbpedia_disease(description, medical_specialty_id) values ('${sanitizedDescription}',${medicalSpecialtyId})`);
         } else {
-            await dbConnector.query(`UPDATE dbpedia_disease SET updated_at = current_timestamp WHERE id = ${id}`);
+            await dbConnector.query(`UPDATE dbpedia_disease SET updated_at = NOW() WHERE id = ${id}`);
         }
     }
 };

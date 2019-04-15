@@ -6,6 +6,19 @@ const getArticleId = async function (articleId) {
     return queryResult[0] ? queryResult[0].id : -1;
 };
 
+const articleExistsForCurrentDisease = async function (articleId, diseaseId) {
+    const queryResult = await dbConnector.query(`SELECT * FROM aw002.pubmed_article_dbpedia_disease WHERE pubmed_article_id = ${articleId} AND dbpedia_disease_id = ${diseaseId}`);
+    return !!queryResult[0];
+};
+
+const createRelationshipToDisease = async function (articleId, diseaseId) {
+    await dbConnector.query(`INSERT INTO pubmed_article_dbpedia_disease(pubmed_article_id, dbpedia_disease_id) VALUES (${articleId}, ${diseaseId})`);
+};
+
+const setUpdatedAtArticleValue = async function (articleId) {
+    await dbConnector.query(`UPDATE pubmed_article SET updated_at = NOW() WHERE id = ${articleId}`);
+};
+
 const saveArticleToDb = async function (articleId, title, abstract, diseaseId) {
     const id = await getArticleId(articleId);
     if (id === -1) {
@@ -13,9 +26,12 @@ const saveArticleToDb = async function (articleId, title, abstract, diseaseId) {
         title = stringUtils.sanitize(title);
         const queryResult = await dbConnector.query(`INSERT INTO pubmed_article(pubmed_id, title, abstract) VALUES (${articleId}, '${title}', '${abstract}')`);
         const pubmedArticleId = queryResult.insertId;
-        await dbConnector.query(`INSERT INTO pubmed_article_dbpedia_disease(pubmed_article_id, dbpedia_disease_id) VALUES (${pubmedArticleId}, ${diseaseId})`);
+        await createRelationshipToDisease(pubmedArticleId, diseaseId);
+    } else if (articleExistsForCurrentDisease(articleId, diseaseId)) {
+        await setUpdatedAtArticleValue(id);
     } else {
-        await dbConnector.query(`INSERT INTO pubmed_article_dbpedia_disease(pubmed_article_id, dbpedia_disease_id) VALUES (${id}, ${diseaseId})`);
+        await setUpdatedAtArticleValue(id);
+        await createRelationshipToDisease(id, diseaseId);
     }
 };
 

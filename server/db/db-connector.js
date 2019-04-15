@@ -1,13 +1,7 @@
 const mariadb = require('mariadb');
+const config = require('../config');
 
-const pool = mariadb.createPool({
-    /*host: 'localhost',
-    port: 3307,*/
-    host: 'appserver.alunos.di.fc.ul.pt',
-    user: 'aw002',
-    password: 'aw002',
-    database: 'aw002'
-});
+const pool = mariadb.createPool(config.db);
 async function connection() {
     try {
         return await pool.getConnection();
