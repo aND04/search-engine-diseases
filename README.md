@@ -19,7 +19,7 @@ Disease search engine is for now a private github repository, but will soon (by 
 ###### Steps:
 * database:
     * open a database manager (mariadb console, heidisql, ...)
-    * create database: `CREATE DATABASE aw002;`
+    * create database: `CREATE DATABASE aw002 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
     * create user: `CREATE USER aw002@'localhost' IDENTIFIED BY 'aw002';`
     * `use aw002;`
     * run all the `.sql` files in `/path/to/project/server/db/sql/` 
@@ -37,16 +37,3 @@ $ npm install
 $ npm start medical_specialty
 ```
 `medical_specialty` will be the one of choice for the execution of the application.
-
-#### Solve character problem
-``` sh
-ALTER TABLE twitter_tweet_dbpedia_disease CONVERT TO CHARACTER SET utf8;
-ALTER TABLE twitter_tweet CONVERT TO CHARACTER SET utf8;
-ALTER TABLE pubmed_article_dbpedia_disease CONVERT TO CHARACTER SET utf8;
-ALTER TABLE pubmed_article CONVERT TO CHARACTER SET utf8;
-ALTER TABLE flickr_photo_dbpedia_disease CONVERT TO CHARACTER SET utf8;
-ALTER TABLE flickr_photo CONVERT TO CHARACTER SET utf8;
-ALTER TABLE dbpedia_disease CONVERT TO CHARACTER SET utf8;
-ALTER TABLE dbpedia_medical_specialty CONVERT TO CHARACTER SET utf8;
-```
-
