@@ -59,13 +59,13 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
         /**
          * Twitter
          */
-        const twitterClient = new Twitter(config.twitter);
+        /*const twitterClient = new Twitter(config.twitter);
         const params = {screen_name: 'nodejs'};
         const tweets = await twitterClient.get(`/search/tweets.json?q=${disease}&result_type=popular`, params);
 
         for (const tweet of tweets['statuses']) {
             let url = `https://twitter.com/statuses/${tweet['id_str']}`;
             await twitterService.saveTweetToDb(tweet['id_str'], tweet['text'], tweet['created_at'], url, diseaseId);
-        }
+        }*/
     }
-}).then(() => process.exit());
+}).finally(() => process.exit());
