@@ -5,10 +5,12 @@ const sanitize = function (string) {
 };
 
 const encodeBase64 = function (string) {
+    if (!string) return '';
     return Buffer.from(string).toString('base64');
 };
 
 const decodeBase64 = function (encodedString) {
+    if (!encodedString) return '';
     return Buffer.from(encodedString, 'base64').toString('utf8');
 };
 

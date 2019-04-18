@@ -28,7 +28,7 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
          */
         const pubmedResult = await http(endpointUtils.pubmedArticleIds(disease));
         const diseaseId = await dbpediaService.getDiseaseId(disease);
-        const articleIds = await xmlUtils.xpathFromXmlString(pubmedResult, '//Id');
+        const articleIds = xmlUtils.xpathFromXmlString(pubmedResult, '//Id');
         const uniqueArticleIds = [...new Set(articleIds)];
         for (const articleId of uniqueArticleIds) {
             const pubmedArticle = await http(endpointUtils.pubmedArticle(articleId));
@@ -42,11 +42,11 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
          * Flickr
          */
         const flickrCallResult = await http(endpointUtils.flickrEndpoint(disease));
-        const titles = await xmlUtils.xpathFromXmlString(flickrCallResult, '//@title');
-        const farmIds = await xmlUtils.xpathFromXmlString(flickrCallResult, '//@farm');
-        const serverIds = await xmlUtils.xpathFromXmlString(flickrCallResult, '//@server');
-        const photoIds = await xmlUtils.xpathFromXmlString(flickrCallResult, '//@id');
-        const secretIds = await xmlUtils.xpathFromXmlString(flickrCallResult, '//@secret');
+        const titles = xmlUtils.xpathFromXmlString(flickrCallResult, '//@title');
+        const farmIds = xmlUtils.xpathFromXmlString(flickrCallResult, '//@farm');
+        const serverIds = xmlUtils.xpathFromXmlString(flickrCallResult, '//@server');
+        const photoIds = xmlUtils.xpathFromXmlString(flickrCallResult, '//@id');
+        const secretIds = xmlUtils.xpathFromXmlString(flickrCallResult, '//@secret');
         const length = farmIds.length;
 
         for (let i = 0; i < length; i++) {
