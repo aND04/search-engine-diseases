@@ -2,7 +2,7 @@ create table pubmed_article
 (
   id          bigint(20)      not null auto_increment,
   pubmed_id   bigint(20)      not null,
-  title       varchar(255)    not null,
+  title       varchar(5000)    not null,
   abstract    varchar(10000)  not null,
   created_at  timestamp       not null default current_timestamp,
   updated_at  timestamp,

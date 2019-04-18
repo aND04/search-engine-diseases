@@ -22,7 +22,7 @@ const setUpdatedAtFlickrPhotoValue = async function (photoId) {
 const savePhotoToDb = async function(url, title, flickr_id, diseaseId) {
     const id = await getPhotoId(flickr_id);
     if (id === -1) {
-        const localTitle = await stringUtils.sanitize(title);
+        const localTitle = await stringUtils.encodeBase64(title);
         const queryResult = await dbConnector.query(`INSERT INTO flickr_photo(flickr_id, url, title) VALUES (${flickr_id}, '${url}', '${localTitle}')`);
         const photoId = queryResult.insertId;
         await createRelationshipToDisease(photoId, diseaseId);

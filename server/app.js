@@ -23,24 +23,21 @@ http(endpointUtils.dbpedia(medicalSpecialty)).then(async (res) => {
     await dbpediaService.saveDiseasesToDb(diseases, medicalSpecialtyId);
     for (const disease of diseases) {
         console.log(`\n\t\tProcessing ${disease}...`);
-        let diseaseId = await dbpediaService.getDiseaseId(disease);
         /**
          * Pubmed
          */
-        await http(endpointUtils.pubmedArticleIds(disease)).then(async (res) => {
-            const diseaseId = await dbpediaService.getDiseaseId(disease);
-            const articleIds = await xmlUtils.xpathFromXmlString(res, '//Id');
-            const uniqueArticleIds = [...new Set(articleIds)];
-            for (const articleId of uniqueArticleIds) {
-                await http(endpointUtils.pubmedArticle(articleId)).then(async (res) => {
-                    const title = xmlUtils.xpathFromXmlString(res, '//ArticleTitle');
-                    const abstract = xmlUtils.xpathFromXmlString(res, '//Abstract');
-                    if (abstract.length > 0){
-                        await pubmedService.saveArticleToDb(articleId, title, abstract, diseaseId);
-                    }
-                });
+        const pubmedResult = await http(endpointUtils.pubmedArticleIds(disease));
+        const diseaseId = await dbpediaService.getDiseaseId(disease);
+        const articleIds = await xmlUtils.xpathFromXmlString(pubmedResult, '//Id');
+        const uniqueArticleIds = [...new Set(articleIds)];
+        for (const articleId of uniqueArticleIds) {
+            const pubmedArticle = await http(endpointUtils.pubmedArticle(articleId));
+            const title = xmlUtils.xpathFromXmlString(pubmedArticle, '//ArticleTitle');
+            const abstract = xmlUtils.xpathFromXmlString(pubmedArticle, '//Abstract');
+            if (abstract.length > 0){
+                await pubmedService.saveArticleToDb(articleId, title, abstract, diseaseId);
             }
-        });
+        }
         /**
          * Flickr
          */

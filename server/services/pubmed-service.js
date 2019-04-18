@@ -22,9 +22,9 @@ const setUpdatedAtArticleValue = async function (articleId) {
 const saveArticleToDb = async function (articleId, title, abstract, diseaseId) {
     const id = await getArticleId(articleId);
     if (id === -1) {
-        abstract = stringUtils.sanitize(abstract);
-        title = stringUtils.sanitize(title);
-        const queryResult = await dbConnector.query(`INSERT INTO pubmed_article(pubmed_id, title, abstract) VALUES (${articleId}, '${title}', '${abstract}')`);
+        const encodedAbstract = stringUtils.encodeBase64(stringUtils.sanitize(abstract));
+        const encodedTitle = stringUtils.encodeBase64(stringUtils.sanitize(title));
+        const queryResult = await dbConnector.query(`INSERT INTO pubmed_article(pubmed_id, title, abstract) VALUES (${articleId}, '${encodedTitle}', '${encodedAbstract}')`);
         const pubmedArticleId = queryResult.insertId;
         await createRelationshipToDisease(pubmedArticleId, diseaseId);
     } else if (articleExistsForCurrentDisease(id, diseaseId)) {

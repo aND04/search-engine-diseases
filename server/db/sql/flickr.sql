@@ -3,7 +3,7 @@ create table flickr_photo
   id          bigint(20)    not null auto_increment,
   flickr_id   bigint(20)    not null,
   url         varchar(255)  not null,
-  title       varchar(255)  not null,
+  title       varchar(5000)  not null,
   created_at  timestamp     not null default current_timestamp,
   updated_at  timestamp,
   primary key (id),
