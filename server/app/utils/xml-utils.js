@@ -1,4 +1,4 @@
-const xpath = require('xpath'), Dom = require('xmldom').DOMParser;
+const xpath = require('xpath/xpath'), Dom = require('xmldom').DOMParser;
 
 exports.xpathFromXmlString = function(xmlString, xpathExpression) {
     const doc = new Dom().parseFromString(xmlString);

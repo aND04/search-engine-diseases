@@ -2,7 +2,8 @@
   "name": "server",
   "version": "1.0.0",
   "scripts": {
-    "start": "./node_modules/.bin/babel-node app.js"
+    "retrieval": "./node_modules/.bin/babel-node app.js 1",
+    "annotation": "./node_modules/.bin/babel-node app.js 2"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
