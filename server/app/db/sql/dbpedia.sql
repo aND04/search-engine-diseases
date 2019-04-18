@@ -23,23 +23,23 @@ create table dbpedia_disease
 create table dbpedia_metadata_disease
 (
     id           bigint(20) not null auto_increment,
+    wikipageId   bigint(20)       not null,
     uri          varchar(255) not null,
     diseaseName  varchar(255) not null,
     image        varchar(255) not null,
     diseaseField varchar(255) not null,
-    wikipageId   bigint(20)       not null,
-    deathNames   varchar(255) not null,
+    deathName   varchar(255) not null,
     created_at  timestamp     not null default current_timestamp,
     updated_at  timestamp,
     primary key (id),
     unique key uk_wikipageId (wikipageId)
 );
 
-create table dbpedia_metadata_dbpedia_disease
+create table dbpedia_metadata_dbpedia_medical_specialty
 (
     dbpedia_metadata_id bigint(20) not null,
-    dbpedia_disease_id  bigint(20) not null,
-    primary key (dbpedia_metadata_id, dbpedia_disease_id),
-    constraint fk_dbpedia_metadata_dbpedia_disease_dbpedia_disease_id   foreign key (dbpedia_disease_id) references dbpedia_disease (id),
+    dbpedia_medical_specialty_id  bigint(20) not null,
+    primary key (dbpedia_metadata_id, dbpedia_medical_specialty_id),
+    constraint fk_dbpedia_metadata_dbpedia_disease_dbpedia_medical_specialty_id   foreign key (dbpedia_medical_specialty_id) references dbpedia_medical_specialty (id),
     constraint fk_dbpedia_metadata_dbpedia_disease_dpedia_metadata_id   foreign key (dbpedia_metadata_id) references dbpedia_metadata_disease (id)
 );
