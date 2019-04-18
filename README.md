@@ -19,7 +19,7 @@ Disease search engine is for now a private github repository, but will soon (by 
 ###### Steps:
 * database:
     * open a database manager (mariadb console, heidisql, ...)
-    * create database: `CREATE DATABASE aw002 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
+    * create database: `CREATE DATABASE aw002 CHARACTER SET utf8 COLLATE utf8_unicode_ci;`
     * create user: `CREATE USER aw002@'localhost' IDENTIFIED BY 'aw002';`
     * `use aw002;`
     * run all the `.sql` files in `/path/to/project/server/db/sql/` 
