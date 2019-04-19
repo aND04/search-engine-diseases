@@ -24,10 +24,27 @@ const areStringsTheSame = function (str1, str2) {
     return hashCode(str1) === hashCode(str2);
 };
 
+const parseTSVtoArray = function (tsv) {
+    let result = [];
+    const lines = tsv.split('\n');
+    for (const line of lines) {
+        if (line.trim().length > 0) {
+            result.push(line.split('\t')[2]);
+        }
+    }
+    return result;
+};
+
+const toSentenceCase = function(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+};
+
 module.exports = {
     sanitize: sanitize,
     encodeBase64: encodeBase64,
     decodeBase64: decodeBase64,
     hashCode: hashCode,
-    areStringsTheSame: areStringsTheSame
+    areStringsTheSame: areStringsTheSame,
+    parseTSVtoArray: parseTSVtoArray,
+    toSentenceCase: toSentenceCase
 };

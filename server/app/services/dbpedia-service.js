@@ -14,7 +14,7 @@ const saveDiseasesToDb = async function (diseases, medicalSpecialtyId) {
 };
 
 const saveMedicalSpecialtyToDb = async function (medicalSpecialty) {
-    const id = await getMedicalSpecialtyFromDb(medicalSpecialty);
+    const id = await getMedicalSpecialtyIdFromDb(medicalSpecialty);
     if (id === -1) {
         const queryResult = await dbConnector.query(`INSERT INTO dbpedia_medical_specialty(description) value ('${medicalSpecialty}')`);
         return queryResult.insertId;
@@ -26,7 +26,7 @@ const saveMedicalSpecialtyToDb = async function (medicalSpecialty) {
 
 const getDiseaseId = async function (disease) {
     let sanitizedDescription = stringUtils.sanitize(disease);
-    const queryResult = await dbConnector.query(`SELECT id FROM dbpedia_disease where description = '${sanitizedDescription}'`);
+    const queryResult = await dbConnector.query(`SELECT id FROM dbpedia_disease WHERE LOWER(description) = LOWER('${sanitizedDescription}')`);
     return queryResult[0] ? queryResult[0].id : -1;
 };
 
@@ -35,7 +35,7 @@ const isDiseaseNew = async function (diseaseId) {
     return !queryResult[0]['updated_at'];
 };
 
-const getMedicalSpecialtyFromDb = async function (medicalSpecialty) {
+const getMedicalSpecialtyIdFromDb = async function (medicalSpecialty) {
     const queryResult = await dbConnector.query(`SELECT id FROM dbpedia_medical_specialty where description = '${medicalSpecialty}'`);
     return queryResult[0] ? queryResult[0].id : -1;
 };
@@ -45,5 +45,5 @@ module.exports = {
     saveMedicalSpecialtyToDb: saveMedicalSpecialtyToDb,
     getDiseaseId: getDiseaseId,
     isDiseaseNew: isDiseaseNew,
-    getMedicalSpecialtyFromDb: getMedicalSpecialtyFromDb
+    getMedicalSpecialtyIdFromDb: getMedicalSpecialtyIdFromDb
 };

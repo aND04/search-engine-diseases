@@ -35,6 +35,32 @@ const saveArticleToDb = async function (articleId, title, abstract, diseaseId) {
     }
 };
 
+const getArticles = async function () {
+    return await dbConnector.query(`SELECT id, title, abstract FROM pubmed_article`);
+};
+
+const getArticleDiseases = async function (articleId) {
+    return await dbConnector.query(`SELECT id FROM dbpedia_disease INNER JOIN pubmed_article_dbpedia_disease padd ON dbpedia_disease.id = padd.dbpedia_disease_id WHERE padd.pubmed_article_id = ${articleId}`);
+};
+
+const mentionDoesNotExist = async function (articleId, diseaseId) {
+    const queryResult = await dbConnector.query(`SELECT * FROM pubmed_article_dbpedia_disease_mentions WHERE dbpedia_disease_id = ${diseaseId} AND pubmed_article_id = ${articleId}`);
+    return !queryResult[0];
+};
+
+const saveArticleDiseaseMention = async function (articleId, diseaseId) {
+    await dbConnector.query(`INSERT INTO pubmed_article_dbpedia_disease_mentions(pubmed_article_id, dbpedia_disease_id) VALUES (${articleId}, ${diseaseId})`);
+};
+
+const incrementArticleDiseaseMentionCount = async function (articleId, diseaseId) {
+    await dbConnector.query(`UPDATE pubmed_article_dbpedia_disease_mentions SET number_of_mentions = number_of_mentions + 1 WHERE pubmed_article_id = ${articleId} AND dbpedia_disease_id = ${diseaseId}`);
+};
+
 module.exports = {
-    saveArticleToDb: saveArticleToDb
+    saveArticleToDb: saveArticleToDb,
+    getArticles: getArticles,
+    getArticleDiseases: getArticleDiseases,
+    mentionDoesNotExist: mentionDoesNotExist,
+    saveArticleDiseaseMention: saveArticleDiseaseMention,
+    incrementArticleDiseaseMentionCount: incrementArticleDiseaseMentionCount
 };

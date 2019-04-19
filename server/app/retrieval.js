@@ -85,4 +85,4 @@ exports.retrieval = async function() {
         await dbpediaMetadataService.saveMetadataToDb(metaWikipageId[i], metaUri[i], metaDiseaseName[i], metaImage[i], metaComment[i], medicalSpecialtyId);
     }
 
-}
+};
