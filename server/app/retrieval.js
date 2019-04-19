@@ -82,7 +82,7 @@ exports.retrieval = async function() {
 
     console.log(`\n\t\tProcessing metadata...`);
     for (let i = 0; i < metaLength; i++) {
-        await dbpediaMetadataService.saveMetadataToDb(metaWikipageId[i], metaUri[i], metaDiseaseName[i], metaImage[i], metaComment[i], medicalSpecialtyId);
+        await dbpediaMetadataService.saveMetadataToDb(metaWikipageId[i], metaUri[i], metaImage[i], metaComment[i], metaDiseaseName[i]);
     }
 
 }
