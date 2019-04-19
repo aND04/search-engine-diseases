@@ -1,4 +1,5 @@
 const retrieval = require('./app/retrieval');
+const annotation = require('./app/annotation');
 
 const option = process.argv[2];
 
@@ -9,7 +10,7 @@ const option = process.argv[2];
                 await retrieval.retrieval();
                 break;
             case '2':
-                console.log('not implemented yet');
+                await annotation.annotation();
                 break;
             default:
                 break;

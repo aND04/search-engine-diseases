@@ -66,22 +66,23 @@ exports.retrieval = async function() {
             let url = `https://twitter.com/statuses/${tweet['id_str']}`;
             await twitterService.saveTweetToDb(tweet['id_str'], tweet['text'], tweet['created_at'], url, diseaseId);
         }
-        /**
-         * Metadata
-         */
-        const metadataCallResult = await http(endpointUtils.dbpediaMeta(medicalSpecialty));
-        const metaUri = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="uri"]');
-        const metaDiseaseName = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="diseaseName"]');
-        const metaImage = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="image"]');
-        const metaDiseaseField = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="diseaseField"]');
-        const metaWikipageId = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="wikipageId"]');
-        const metaDeathName = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="deathName"]');
-        const metaLength = metaUri.length;
-
-        for (let i = 0; i < metaLength; i++) {
-            await dbpediaMetadataService.saveMetadataToDb(metaWikipageId[i], metaUri[i], metaDiseaseName[i], metaImage[i], metaDiseaseField[i], metaDeathName[i], medicalSpecialtyId);
-
-        }
 
     }
-}
+
+    /**
+     * Metadata
+     */
+    const metadataCallResult = await http(endpointUtils.dbpediaMeta(medicalSpecialty));
+    const metaUri = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="uri"]');
+    const metaDiseaseName = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="diseaseName"]');
+    const metaImage = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="image"]');
+    const metaWikipageId = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="wikipageId"]');
+    const metaComment = xmlUtils.xpathFromXmlString(metadataCallResult, '//*[@name="comment"]');
+    const metaLength = metaUri.length;
+
+    console.log(`\n\t\tProcessing metadata...`);
+    for (let i = 0; i < metaLength; i++) {
+        await dbpediaMetadataService.saveMetadataToDb(metaWikipageId[i], metaUri[i], metaImage[i], metaComment[i], metaDiseaseName[i]);
+    }
+
+};
