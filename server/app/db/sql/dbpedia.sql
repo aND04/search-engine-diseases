@@ -27,12 +27,10 @@ create table dbpedia_metadata_disease
     uri          varchar(255) not null,
     diseaseName  varchar(255) not null,
     image        varchar(255) not null,
-    diseaseField varchar(255) not null,
-    deathName   varchar(255) not null,
+    comment   varchar(255) not null,
     created_at  timestamp     not null default current_timestamp,
     updated_at  timestamp,
-    primary key (id),
-    unique key uk_wikipageId (wikipageId)
+    primary key (id)
 );
 
 create table dbpedia_metadata_dbpedia_medical_specialty

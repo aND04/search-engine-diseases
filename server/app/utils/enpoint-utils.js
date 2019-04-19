@@ -3,7 +3,7 @@ const dbPediaEndpoint = function (medicalSpecialty) {
 };
 
 const dbPediaMetaEndpoint = function (medicalSpecialty) {
-    return `http://dbpedia.org/sparql/?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+%3Furi+%3FdiseaseName+%3Fimage+%3FdiseaseField+%3FwikipageId+%3FdeathName+where+%7B%0D%0A+%3Furi+a+dbo%3ADisease+.%0D%0A+%3Furi+dbp%3Afield+dbr%3A${medicalSpecialty}.%0D%0A+%3Furi+foaf%3Aname+%3FdiseaseName.%0D%0A+%3Furi+foaf%3Adepiction+%3Fimage.%0D%0A+%3Furi+dbp%3Afield+%3FdiseaseField.%0D%0A+%3Furi+dbo%3AwikiPageID+%3FwikipageId.%0D%0A+%3Fdeath+dbo%3AdeathCause+%3Furi+.%0D%0A+%3Fdeath+foaf%3Aname+%3FdeathName%0D%0A%7D&format=text%2Fxml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on&run=+Run+Query+\\`;
+    return `http://dbpedia.org/sparql/?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=SELECT+%3FwikipageId+%3Furi+%3FdiseaseName+%3Fimage+%3Fcomment+WHERE+%7B%0D%0A+%3Furi+a+dbo%3ADisease+%3B%0D%0A+dbp%3Afield+dbr%3A${medicalSpecialty}+%3B%0D%0A+foaf%3Aname+%3FdiseaseName+%3B%0D%0A+dbo%3AwikiPageID+%3FwikipageId+%3B%0D%0A+rdfs%3Acomment+%3Fcomment+FILTER+%28lang%28%3Fcomment%29%3D%22en%22%29+.%0D%0A+OPTIONAL+%7B%3Furi+foaf%3Adepiction+%3Fimage%7D%0D%0A%7D&format=text%2Fxml&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000&debug=on&run=+Run+Query+\\`;
 };
 
 const pubmedArticleIdsEndpoint = function (disease) {

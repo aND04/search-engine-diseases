@@ -1,6 +1,7 @@
 const sanitize = function (string) {
     if (!string) return '';
     string = string.toString().replace(/\\n/g, '');
+    string = string.toString().replace(/'/g, "''");
     return string.replace(/\s{2,}/g, ' ');
 };
 
