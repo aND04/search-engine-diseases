@@ -1,5 +1,12 @@
 <h2>{{disease}}</h2>
 <mat-card *ngFor="let title of titles; let i = index"  style="word-wrap: break-word !important;">
+  <ul *ngIf="mentions">
+    <ng-container *ngFor="let mention of mentions[i]">
+        <li *ngIf="mention.url && mention.text">
+          <a href="{{ mention.url }}" target="_blank">{{ mention.text }}</a>
+        </li>
+    </ng-container>
+  </ul>
   <mat-form-field>
     <input matInput placeholder="title" readonly [ngModel]="title" name="title">
   </mat-form-field>

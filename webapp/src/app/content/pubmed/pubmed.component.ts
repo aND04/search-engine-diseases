@@ -15,6 +15,7 @@ export class PubmedComponent implements OnInit {
 
   public titles: Array<string>;
   public abstracts: Array<string>;
+  public mentions: Array<string>;
 
   constructor(private diseaseService: DiseaseService,
               private pubmedService: PubmedService,
@@ -47,6 +48,77 @@ export class PubmedComponent implements OnInit {
       this.titles = titles;
       const abstracts = this.xmlService.getXpathContent(res, '//Abstract');
       this.abstracts = abstracts;
+
+      //crio novo array com title e abstract juntos
+      const completeArticles = titles.map(function(articleTitle, index) {
+        const joinedText = `${articleTitle} ${abstracts[index]}`;
+        return joinedText.replace(/\s\s+/g, ' ');
+      });
+      this.setMer(completeArticles);
     });
   }
+
+  private setMer(abstracts: Array<string>) {
+    this.pubmedService.getAbstractMentions(abstracts).subscribe((results)=> {
+      this.mentions = results.map(result => {
+        const transformresult = this.csvToJS(result);
+        //Anna, podes aplicar aqui a função para o count
+        return this.filterDiseaseMention(transformresult);
+      });
+    });
+  }
+
+  //Converte o resultado do MER, que vem em CSV, num array para se poder processar a informação
+  private csvToJS(csv) {
+      const lines = csv.split("\n");
+      const diseaseIndex = 2;
+
+      if (lines.length > 1 && lines[lines.length-1] === "") {
+          lines.pop();
+      }
+
+      return lines.map(line => {
+        const arrayFromSpacing = line.replace(/\s+/g,' ').toLowerCase().split(' ');
+
+        if (arrayFromSpacing.length > 4) {
+            return arrayFromSpacing.reduce(
+              (accumulator, currentValue, index, originalArray) => {
+                if(index > diseaseIndex && index < originalArray.length -1) {
+                    accumulator[diseaseIndex] = `${accumulator[diseaseIndex]} ${currentValue}`
+                } else {
+                    accumulator.push(currentValue);
+                }
+                return accumulator;
+              },
+            []);
+        }
+        return arrayFromSpacing;
+      });
+    };
+
+    //pega no array de diseases que vem do MER, já transformado, e filtra para que só apareça uma doença por artigo
+    private filterDiseaseMention(diseases) {
+      const diseaseIndex = 2;
+      let filterRepeated = [];
+
+      diseases.forEach((disease, index)  => {
+          const checkIfExists = filterRepeated.some(diseaseReference => {
+              return diseaseReference.indexOf(disease[diseaseIndex]) !== -1;
+          });
+          if (!checkIfExists) {
+              filterRepeated.push(disease);
+          }
+      });
+
+      //retorna objecto formatado para preencher o elemento <a>
+      return filterRepeated.map((disease, index) => {
+          if (disease[0] !== "") {
+              return {
+                url: disease[disease.length -1],
+                text: disease[diseaseIndex]
+              }
+          }
+          return {};
+      });
+    }
 }
