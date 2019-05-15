@@ -50,9 +50,6 @@ function post() {
                     '<td>' + item.pub_Date + '</td></tr>';
             });
 
-            //apaga as linhas na tabela
-            $('#article').empty().append(titles).append(trHTML);
-
             // limpar as linhas
             $('#article').empty().append(titles).append(trHTML);
 

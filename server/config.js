@@ -1,9 +1,9 @@
 module.exports = {
     db: {
-        host: 'appserver.alunos.di.fc.ul.pt',
-        // host: 'localhost',
-        user: 'aw002',
-        password: 'aw002',
+        //host: 'appserver.alunos.di.fc.ul.pt',
+        host: 'localhost',
+        user: 'root',
+        password: 'lino',
         database: 'aw002'
     },
     twitter: {
