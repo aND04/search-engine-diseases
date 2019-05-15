@@ -30,8 +30,8 @@ function post() {
         method: "POST",
         success: function (result_article) {
             console.log(result_article);
-
-            var trHTML = '';
+            let titles = '<th>Title</th><th>Abstract</th><th>Pubmed</th><th>Date</th>';
+            var trHTML = ''
             $.each(result_article, function (i, item) {
                 trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.title))) +
                     '</td><td>' + decodeURIComponent(escape(window.atob(item.abstract))) +
@@ -57,7 +57,8 @@ function post() {
                     '</td><td> <a target="_blank" href= https://www.ncbi.nlm.nih.gov/pubmed/' + item.pubmed_id + '> https://www.ncbi.nlm.nih.gov/pubmed/ ' + item.pubmed_id + '</a></td>' +
                     '<td>' + item.pub_Date + '</td></tr>';
             });
-            $('#article').append(trHTML);
+            //$('#article').update(trHTML);
+            $('#article').empty().append(titles).append(trHTML);
 
             function getWordsNumber(){
                 let inputText = document.getElementById("article");
@@ -88,12 +89,12 @@ function post() {
 
         success: function (result_tweet) {
             console.log(result_tweet);
-
+            let titles = '<tr> <em>Twitter photos</em><th>Description</th> <th>URL</th> <th>Date</th> </tr>';
             var trHTML = '';
             $.each(result_tweet, function (i, item) {
                 trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.description))) + '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + item.tweet_date + '</td></tr>';
             });
-            $('#twitter').append(trHTML);
+            $('#twitter').empty().append(titles).append(trHTML);
         }
 
 
@@ -107,13 +108,13 @@ function post() {
         success: function (result_flickr) {
 
             console.log(result_flickr);
-
+            let titles = '<tr> <em>Flirck photos</em> <th>Title</th> <th>URL</th> <th>Date</th> </tr>';
             var trHTML = '';
             $.each(result_flickr, function (i, item) {
                 trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.title))) +
-                    '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + item.flickr_date + '</td></tr>';
+                    '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + item.created_at + '</td></tr>';
             });
-            $('#flickr').append(trHTML);
+            $('#flickr').empty().append(titles).append(trHTML);
         }
     })
 
@@ -125,14 +126,14 @@ function post() {
         success: function (result_metadata) {
 
             console.log(result_metadata);
-
+            let titles = '<tr><em>More info</em><th>wikipageId</th><th>URI</th> <th>Image</th> <th>Comment</th></tr>';
             var trHTML = '';
             $.each(result_metadata, function (i, item) {
                 trHTML += '<tr><td>' + item.wikipageId +
                     '</td><td> <a target="_blank" href="' + item.uri + '">  ' + item.uri + '</a></td><td>  ' +
                     '<img src="' + item.image + '" width="420" height="420"> </td><td>' + decodeURIComponent(escape(window.atob(item.comment))) + '</td></tr>';
             });
-            $('#metadata').append(trHTML);
+            $('#metadata').empty().append(titles).append(trHTML);
 
         }
     })
@@ -145,13 +146,13 @@ function post() {
         success: function (result_disease) {
             console.log(result_disease);
 
-
+            let titles = '<tr> <em>Related Diseases</em> <th>Id</th> <th>Disease Name</th></tr>';
             var trHTML = '';
             $.each(result_disease, function (i, item) {
                 trHTML += '<tr><td>' + item.dbpedia_disease_id +
                     '</td><td>'+ item.description + '</td></tr>';
             });
-            $('#related_diseases').append(trHTML);
+            $('#related_diseases').empty().append(titles).append(trHTML);
         }
 
     })
