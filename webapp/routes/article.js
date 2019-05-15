@@ -12,7 +12,7 @@ router.post('/', function (req, res) {
   Article.getTopNRelatedArticles(data,function (err, queryRes) {
     if (err) {
       console.log(data);
-      res.status(400).json(err);
+      res.status(404).json(err);
     } else {
       res.status(200).json(queryRes);
     }
