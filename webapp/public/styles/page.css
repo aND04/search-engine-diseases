@@ -7,13 +7,12 @@
 
 body {
     margin: 0 auto;
-    background-position:left;
     background-size: contain;
     background: aliceblue;
 }
 
 .autocomplete{
-    margin: 0 auto;
+    margin-left: 5px;
     background-position:right;
     background-size: contain;
 }
@@ -26,72 +25,25 @@ body {
     margin: 0 auto;
     overflow: hidden;
 }
-.menu a {
-    float left;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 10px;
+
+em{
+    margin-left: 16px;
 }
 
-.index table{
+table{
     background: white;
     border: 5px;
     width: 100%;
 }
-.index th, td{
-    background: white;
-    font-size:10px;
+
+th{
+    font-size: 14px;
     text-align: left;
     padding: 8px;
 }
 
-.related table{
-    background: white;
-    border: 5px;
-    width: 100%;
-}
-.related th, td{
-    background: white;
-    font-size:10px;
+td{
+    font-size:12px;
     text-align: left;
     padding: 8px;
 }
-
-.twitter table{
-    background: white;
-    background: white;
-    border: 5px;
-    width: 100%;
-}
-.twitter th, td{
-    background: white;
-    font-size:10px;
-    text-align: left;
-    padding: 8px;
-}
-.flirck table{
-    background: white;
-    border: 5px;
-    width: 100%;
-}
-.flirck th, td{
-    background: white;
-    font-size:10px;
-    text-align: left;
-    padding: 8px;
-}
-.metadata table{
-    background: white;
-    border: 5px;
-    width: 100%;
-}
-.metadata th, td{
-    background: white;
-    font-size:10px;
-    text-align: left;
-    padding: 8px;
-}
-
-

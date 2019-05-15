@@ -1,117 +1,122 @@
 <html>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="/javaScript/ajax.js"></script>
-<script type="text/javascript" src="/javaScript/autocomplete.js"></script>
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="styles/page.css">
-
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/javaScript/ajax.js"></script>
+    <script type="text/javascript" src="/javaScript/autocomplete.js"></script>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/page.css">
+
+
     <title>Search Engine Diseases</title>
 </head>
 
-<body onload="autocompleteDisease()">
+<body onload="final()">
+
 <!-- Header Section -->
 <header>
     <div class="head1">Search Engine Diseases</div>
-
-
 </header>
 
 <!-- Menu Navigation Bar -->
 <div class="menu">
-    <!-- Button search -->
-    <span class = "body_sec">
-        <br>
-        <form id="disease" autocomplete="off">
-    <span class="autocomplete">
-    Disease: <input type="text" name="disease_name" id="myInput" type="text" name="diseaseAutocomplete" placeholder="Search">
-    Top: <input type="number" name="topn">
-    </span>
-            <input type="button" value="Disease" onclick="post()">
-        </form>
-        <br>
-</span>
 
-<!-- Body section -->
-    <section1 class="index">
-        <div style="height:500px;width:1000px;overflow:auto;float: left;">
+    <!-- Form for search -->
+    <br>
+
+    <form id="disease" autocomplete="off">
+        <div class="autocomplete">
+            Disease: <input type="text" name="disease_name" id="myInput" type="text" name="diseaseAutocomplete" placeholder="Search">
+            Top: <input type="number" name="topn">
+            <input type="button" value="Disease" onclick="post()">
+        </div>
+    </form>
+
+    <hr>
+    <br>
+
+    <!-- Article section -->
+    <section class="index">
         <table id="article" border="2">
+            <tr>
                 <em>Articles</em>
                 <th>Title</th>
                 <th>Abstract</th>
                 <th>Pubmed</th>
                 <th>Date</th>
+            </tr>
         </table>
-        </div>
-    </section1>
-    <section5 class="related">
-        <div style="height:500px;width:500px;overflow:auto;float:right">
-            <table id="related_diseases" border="2">
-                <tr>
-                    <em>Related Diseases</em>
-                    <th>Id</th>
-                    <th>Disease Name</th>
+    </section>
 
-                </tr>
-            </table>
-        </div>
-    </section5>
     <hr>
     <br>
 
-<section2 class="twitter">
-    <div style="height:500px;width:750px;overflow:auto; float: left;">
-    <table id="twitter" border="2">
-        <tr>
-            <em>Twitter photos</em>
-            <th>Description</th>
-            <th>URL</th>
-            <th>Date</th>
-        </tr>
-    </table>
-    </div>
-</section2>
-<br>
-<section3 class="flirck">
-    <div style="height:500px;width:750px;overflow:auto;float: right;">
-    <table id="flickr" border="2">
-        <tr>
-            <em>Flirck photos</em>
-            <th>Title</th>
-            <th>URL</th>
-            <th>Date</th>
-        </tr>
-    </table>
-    </div>
-</section3>
+    <!-- Related diseases section -->
+    <section class="related">
+        <table id="related_diseases" border="2">
+            <tr>
+                <em>Related Diseases</em>
+                <th>Id</th>
+                <th>Disease Name</th>
+            </tr>
+        </table>
+    </section>
+
     <hr>
+    <br>
 
-<section4 class="metadata">
-    <div style="height:500px;width:1000px;overflow:auto;float: left;">
-    <table id="metadata" border="2">
-        <tr>
-            <em>More info</em>
-            <th>wikipageId</th>
-            <th>URI</th>
-            <th>Image</th>
-            <th>Comment</th>
-        </tr>
-    </table>
-    </div>
-</section4>
+    <!-- twitter section -->
+    <section class="twitter">
+        <table id="twitter" border="2">
+            <tr>
+                <em>Twitter photos</em>
+                <th>Description</th>
+                <th>URL</th>
+                <th>Date</th>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+    <br>
+
+    <!-- Flirck section -->
+    <section class="flirck">
+        <table id="flickr" border="2">
+            <tr>
+                <em>Flirck photos</em>
+                <th>Title</th>
+                <th>URL</th>
+                <th>Date</th>
+            </tr>
+        </table>
+    </section>
+
+    <hr>
+    <br>
+
+    <!-- Metadata section -->
+    <section class="metadata">
+        <table id="metadata" border="2">
+            <tr>
+                <em>Metadata</em>
+                <th>wikipageId</th>
+                <th>URI</th>
+                <th>Image</th>
+                <th>Comment</th>
+            </tr>
+        </table>
+    </section>
 
 </div>
-
-
-
-</div>
-
 </body>
 </html>
 
