@@ -29,7 +29,7 @@ function post() {
         success: function (result_article) {
 
             //criar o titulo das colunas
-            var titles = '<th>Title</th><th>Abstract</th><th>Pubmed</th><th>Date</th>';
+            var titles = '<th>Title</th><th>Abstract</th><th>Pubmed</th><th>Date</th>th>Rate</th>';
 
             //escreve as linhas na tabela
             var trHTML = ''
