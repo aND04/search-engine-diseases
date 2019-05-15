@@ -7,11 +7,6 @@ $(document).ready(
 var domain = "http://localhost:3000/";
 
 //faz ligação ha pasta routes
-var articleResource = "article";
-var tweetResource = "tweet";
-var flickrResource = "flickr";
-var metadataResource = "metadata";
-var diseaseResource = "disease";
 var autocomplete = 'autocomplete';
 
 function final() {

@@ -1,53 +1,118 @@
 <html>
-<title>Search Engine Diseases</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="/ajax/ajax.js"></script>
-<script type="text/javascript" src="/ajax/autocomplete.js"></script>
+<script src="/javaScript/ajax.js"></script>
+<script type="text/javascript" src="/javaScript/autocomplete.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="styles/page.css">
+
+<head>
+    <title>Search Engine Diseases</title>
+</head>
+
 <body>
+<!-- Header Section -->
+<header>
+    <div class="head1">Search Engine Diseases</div>
 
-<!-- Sidebar -->
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%">
-    <h3 class="w3-bar-item">Menu</h3>
-    <a href="index.html" class="w3-bar-item w3-button">Article</a>
-    <a href="twitter.html" class="w3-bar-item w3-button">Twitter</a>
-    <a href="flickr.html" class="w3-bar-item w3-button">Flickr</a>
-    <a href="metadata.html" class="w3-bar-item w3-button">Metadata</a>
-    <a href="related_diseases.html" class="w3-bar-item w3-button">Related Diseases</a>
-</div>
 
-<!-- Page Content -->
-    <div style="margin-left:15%">
+</header>
 
-    <div class="w3-container w3-teal">
-        <h1>Diseases - Articles</h1>
-    </div>
-    <br>
-    <form id="disease" action="javascript:void(0);" autocomplete="off" oninput="final();">
-        <div class="autocomplete" style="width:300px;">
-        Disease: <input type="text" name="disease_name" id="myInput" type="text" name="myCountry" placeholder="Country">
-        Top: <input type="number" name="topn">
-        </div>
-        <input type="button" value="Disease" onclick="post()">
-    </form>
-        <hr>
+<!-- Menu Navigation Bar -->
+<div class="menu">
+    <!-- Button search -->
+    <span class = "body_sec">
+        <br>
+        <form id="disease" action="javascript:void(0);" autocomplete="off" oninput="final();">
+    <span class="autocomplete">
+    Disease: <input type="text" name="disease_name" id="myInput" type="text" name="diseaseAutocomplete" placeholder="Search">
+    Top: <input type="number" name="topn">
+    </span>
+            <input type="button" value="Disease" onclick="post()">
+        </form>
+        <br>
+</span>
 
-    <section>
-        <table id="article" border='5'>
-            <tr>
+<!-- Body section -->
+    <section1 class="index">
+        <div style="height:500px;width:1000px;overflow:auto;float: left;">
+        <table id="article" border="2">
+                <em>Articles</em>
                 <th>Title</th>
                 <th>Abstract</th>
                 <th>Pubmed</th>
                 <th>Date</th>
-            </tr>
         </table>
+        </div>
+    </section1>
+    <section5 class="related">
+        <div style="height:500px;width:500px;overflow:auto;float:right">
+            <table id="related_diseases" border="2">
+                <tr>
+                    <em>Related Diseases</em>
+                    <th>Id</th>
+                    <th>Disease Name</th>
 
-    </section>
+                </tr>
+            </table>
+        </div>
+    </section5>
+    <hr>
+    <br>
+
+<section2 class="twitter">
+    <div style="height:500px;width:750px;overflow:auto; float: left;">
+    <table id="twitter" border="2">
+        <tr>
+            <em>Twitter photos</em>
+            <th>Description</th>
+            <th>URL</th>
+            <th>Date</th>
+        </tr>
+    </table>
     </div>
+</section2>
+<br>
+<section3 class="flirck">
+    <div style="height:500px;width:750px;overflow:auto;float: right;">
+    <table id="flickr" border="2">
+        <tr>
+            <em>Flirck photos</em>
+            <th>Title</th>
+            <th>URL</th>
+            <th>Date</th>
+        </tr>
+    </table>
+    </div>
+</section3>
+    <hr>
+
+<section4 class="metadata">
+    <div style="height:500px;width:1000px;overflow:auto;float: left;">
+    <table id="metadata" border="2">
+        <tr>
+            <em>More info</em>
+            <th>wikipageId</th>
+            <th>URI</th>
+            <th>Image</th>
+            <th>Comment</th>
+        </tr>
+    </table>
+    </div>
+</section4>
+
+</div>
+
+
+
+</div>
 
 </body>
 </html>
+
+

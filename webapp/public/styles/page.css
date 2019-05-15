@@ -1,0 +1,97 @@
+.head1 {
+    font-size:40px;
+    color: #000000;
+    font-weight:bold;
+    alignment: center;
+}
+
+body {
+    margin: 0 auto;
+    background-position:left;
+    background-size: contain;
+    background: aliceblue;
+}
+
+.autocomplete{
+    margin: 0 auto;
+    background-position:right;
+    background-size: contain;
+}
+
+.menu {
+    position: sticky;
+    top: 0;
+    padding:10px 0px 10px 0px;
+    color: black;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.menu a {
+    float left;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.index table{
+    background: white;
+    border: 5px;
+    width: 100%;
+}
+.index th, td{
+    background: white;
+    font-size:10px;
+    text-align: left;
+    padding: 8px;
+}
+
+.related table{
+    background: white;
+    border: 5px;
+    width: 100%;
+}
+.related th, td{
+    background: white;
+    font-size:10px;
+    text-align: left;
+    padding: 8px;
+}
+
+.twitter table{
+    background: white;
+    background: white;
+    border: 5px;
+    width: 100%;
+}
+.twitter th, td{
+    background: white;
+    font-size:10px;
+    text-align: left;
+    padding: 8px;
+}
+.flirck table{
+    background: white;
+    border: 5px;
+    width: 100%;
+}
+.flirck th, td{
+    background: white;
+    font-size:10px;
+    text-align: left;
+    padding: 8px;
+}
+.metadata table{
+    background: white;
+    border: 5px;
+    width: 100%;
+}
+.metadata th, td{
+    background: white;
+    font-size:10px;
+    text-align: left;
+    padding: 8px;
+}
+
+

@@ -19,6 +19,7 @@ var diseaseResource = "disease";
 function post() {
     // vai buscar o id registo e vai enviar para dentro do post
     var data = $("#disease").serialize();
+    let diseaseName = $("#myInput").val();
 
     console.log(data);
 
@@ -34,11 +35,48 @@ function post() {
             $.each(result_article, function (i, item) {
                 trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.title))) +
                     '</td><td>' + decodeURIComponent(escape(window.atob(item.abstract))) +
+                    '<section class=\'rating-widget\'>' +
+                    '<ul id=\'stars\ text-center\'>' +
+                    '<span class=\'star\' title=\'Poor\' data-value=\'1\'>' +
+                    '<i class=\"fa fa-star fa-fw\">' + '</i>' +
+                    '</span>' +
+                    '<span class=\'star\' title=\'Fair\' data-value=\'2\'>' +
+                    '<i class=\'fa fa-star fa-fw\'>' + '</i>' +
+                    '</span>' +
+                    '<span class=\'star\' title=\'Good\' data-value=\'3\'>' +
+                    '<i class=\'fa fa-star fa-fw\'>' + '</i>' +
+                    '</span>' +
+                    '<span class=\'star\' title=\'Excellent\' data-value=\'4\'>' +
+                    '<i class=\'fa fa-star fa-fw\'>' + '</i>' +
+                    '</span>' +
+                    '<span class=\'star\' title=\'WOW!!!\' data-value=\'5\'>' +
+                    '<i class=\'fa fa-star fa-fw\'>' + '</i>' +
+                    '</span>' +
+                    '</ul>' +
+                    '</div>' +
                     '</td><td> <a target="_blank" href= https://www.ncbi.nlm.nih.gov/pubmed/' + item.pubmed_id + '> https://www.ncbi.nlm.nih.gov/pubmed/ ' + item.pubmed_id + '</a></td>' +
                     '<td>' + item.pub_Date + '</td></tr>';
             });
             $('#article').append(trHTML);
 
+            function getWordsNumber(){
+                let inputText = document.getElementById("article");
+                let innerHTML = inputText.innerHTML;
+                //let inputText = "asthma is bad asthma Asthma"
+
+                let palavra = innerHTML.match(new RegExp(diseaseName, "igm"));
+                //console.log("palavra: " + palavra);
+                const numberOfOccurrences = innerHTML.match(new RegExp(diseaseName, "igm")).length;
+                console.log("occorences: " + numberOfOccurrences);
+                for(let i = 0; i<numberOfOccurrences; i++){
+                    let res = innerHTML.replace(new RegExp(diseaseName, "igm"), "<span class='highlight' style='background-color:yellow;'>" + palavra[i]+"</span>");
+                    innerHTML = res;
+                }
+                inputText.innerHTML = innerHTML;
+
+            }
+
+            getWordsNumber();
         }
     })
 
