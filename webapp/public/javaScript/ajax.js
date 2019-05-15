@@ -31,7 +31,7 @@ function post() {
         success: function (result_article) {
             console.log(result_article);
             let titles = '<th>Title</th><th>Abstract</th><th>Pubmed</th><th>Date</th>';
-            var trHTML = ''
+            var trHTML = '';
             $.each(result_article, function (i, item) {
                 trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.title))) +
                     '</td><td>' + decodeURIComponent(escape(window.atob(item.abstract))) +
@@ -46,7 +46,7 @@ function post() {
                     '</ul>' +
                     '</div>' +
                     '</td><td> <a target="_blank" href= https://www.ncbi.nlm.nih.gov/pubmed/' + item.pubmed_id + '> https://www.ncbi.nlm.nih.gov/pubmed/ ' + item.pubmed_id + '</a></td>' +
-                    '<td>' + item.pub_Date + '</td></tr>';
+                    '<td>' + new Date(item.pub_Date).toUTCString() + '</td></tr>';
             });
             //$('#article').update(trHTML);
             $('#article').empty().append(titles).append(trHTML);
@@ -83,7 +83,7 @@ function post() {
             let titles = '<tr> <em>Twitter photos</em><th>Description</th> <th>URL</th> <th>Date</th> </tr>';
             var trHTML = '';
             $.each(result_tweet, function (i, item) {
-                trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.description))) + '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + item.tweet_date + '</td></tr>';
+                trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.description))) + '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + new Date(item.tweet_date).toUTCString() + '</td></tr>';
             });
             $('#twitter').empty().append(titles).append(trHTML);
         }
@@ -103,7 +103,7 @@ function post() {
             var trHTML = '';
             $.each(result_flickr, function (i, item) {
                 trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.title))) +
-                    '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + item.created_at + '</td></tr>';
+                    '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + new Date(item.flickr_date).toUTCString() + '</td></tr>';
             });
             $('#flickr').empty().append(titles).append(trHTML);
         }

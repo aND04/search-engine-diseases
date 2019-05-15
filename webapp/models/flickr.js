@@ -4,7 +4,7 @@ var db = require('./dbConnection');
 var Flickr = {
     /** For a given disease get the top-n most recent flickr photos. */
     getTopNMostRecentFlickPhotos: function (req, result) {
-        var sql = "SELECT  flickrPhoto.url, flickrPhoto.title, flickrPhoto.created_at " +
+        var sql = "SELECT  flickrPhoto.url, flickrPhoto.title, flickrPhoto.flickr_date " +
             "FROM dbpedia_disease disease, flickr_photo_dbpedia_disease flickrD, " +
             "flickr_photo flickrPhoto " +
             "WHERE disease.description = '" + req.disease + "' " +
