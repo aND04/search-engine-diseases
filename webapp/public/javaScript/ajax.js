@@ -36,21 +36,12 @@ function post() {
                 trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.title))) +
                     '</td><td>' + decodeURIComponent(escape(window.atob(item.abstract))) +
                     '<section class=\'rating-widget\'>' +
-                    '<ul id=\'stars\ text-center\'>' +
-                    '<span class=\'star\' title=\'Poor\' data-value=\'1\'>' +
-                    '<i class=\"fa fa-star fa-fw\">' + '</i>' +
-                    '</span>' +
-                    '<span class=\'star\' title=\'Fair\' data-value=\'2\'>' +
-                    '<i class=\'fa fa-star fa-fw\'>' + '</i>' +
-                    '</span>' +
-                    '<span class=\'star\' title=\'Good\' data-value=\'3\'>' +
-                    '<i class=\'fa fa-star fa-fw\'>' + '</i>' +
-                    '</span>' +
-                    '<span class=\'star\' title=\'Excellent\' data-value=\'4\'>' +
-                    '<i class=\'fa fa-star fa-fw\'>' + '</i>' +
-                    '</span>' +
-                    '<span class=\'star\' title=\'WOW!!!\' data-value=\'5\'>' +
-                    '<i class=\'fa fa-star fa-fw\'>' + '</i>' +
+                    '<ul id=\'thumbs\ text-center\' style="font-size:20px;float:right">' +
+                    '<span class=\'up\' title=\'LIKE\' >' +
+                    '<i class="fa fa-thumbs-o-up">' + '</i>' +
+                    '</span>' + "  " +
+                    '<span class=\'down\' title=\'DISKLIKE\'">' +
+                    '<i class="fa fa-thumbs-o-down">' + '</i>' +
                     '</span>' +
                     '</ul>' +
                     '</div>' +
