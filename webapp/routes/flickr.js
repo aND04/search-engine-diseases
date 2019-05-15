@@ -5,8 +5,8 @@ var Flickr = require('../models/flickr');
 router.post('/', function (req, res) {
     //Store the request params
     var data = {
-        disease: req.body.disease,  //Disease name
-        topN: req.body.topN        //Number of photos to show
+        disease: req.body.disease_name,  //Disease name
+        topN: req.body.topn              //Number of photos to show
     };
 
     Flickr.getTopNMostRecentFlickPhotos(data, function (err, queryRes) {

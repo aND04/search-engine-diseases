@@ -5,8 +5,8 @@ var Tweet = require('../models/tweet');
 router.post('/', function (req, res) {
     //Store the request params
     var data = {
-        disease: req.body.disease,  //Disease name
-        topN: req.body.topN        //Number of tweets to show
+        disease: req.body.disease_name,  //Disease name
+        topN: req.body.topn              //Number of tweets to show
     };
 
     Tweet.getTopNMostRecentTweets(data, function (err, queryRes) {
