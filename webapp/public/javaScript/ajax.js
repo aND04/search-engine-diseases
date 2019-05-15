@@ -36,18 +36,15 @@ function post() {
             $.each(result_article, function (i, item) {
                 trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.title))) +
                     '</td><td>' + decodeURIComponent(escape(window.atob(item.abstract))) +
-                    '<section class=\'rating-widget\'>' +
-                    '<ul id=\'thumbs\ text-center\' style="font-size:20px;float:right">' +
+                    '</td><td> <a target="_blank" onclick="implicitFeed()" href= https://www.ncbi.nlm.nih.gov/pubmed/' + item.pubmed_id + '> https://www.ncbi.nlm.nih.gov/pubmed/ ' + item.pubmed_id + '</a></td>' +
+                    '<td>' + new Date(item.pub_Date).toUTCString() + '</td></tr>' + 
+                    '<td>' + '<ul id=\'thumbs\ \text-left\' style="font-size:40px;width:min-content;alignment:left">' +
                     '<span class=\'up\' title=\'LIKE\' >' +
-                    '<i class="fa fa-thumbs-o-up">' + '</i>' +
-                    '</span>' + "  " +
-                    '<span class=\'down\' title=\'DISKLIKE\'">' +
-                    '<i class="fa fa-thumbs-o-down">' + '</i>' +
-                    '</span>' +
-                    '</ul>' +
-                    '</div>' +
-                    '</td><td> <a target="_blank" href= https://www.ncbi.nlm.nih.gov/pubmed/' + item.pubmed_id + '> https://www.ncbi.nlm.nih.gov/pubmed/ ' + item.pubmed_id + '</a></td>' +
-                    '<td>' + new Date(item.pub_Date).toUTCString() + '</td></tr>';
+                    '<br>' +
+                    '<i class="fa fa-thumbs-o-up" onclick="increaseExpFeed()">' + '</i></span>' +
+                    '<span class=\'down\' title=\'DISLIKE\'">' +
+                    '<i class="fa fa-thumbs-o-down" onclick="decreaseExpFeed()" ' + '</i></span>' +
+                    '</ul>' + '</td></tr>';
             });
 
             // limpar as linhas
@@ -167,3 +164,15 @@ function post() {
 
     })
 }
+
+function implicitFeed(){
+    
+}
+
+function increaseExpFeed() {
+
+}
+
+function decreaseExpFeed() {
+
+    }
