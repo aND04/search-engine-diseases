@@ -37,3 +37,22 @@ async function autocompleteDisease() {
         }
     });
 }
+
+//Search only from the beginning of the string
+$.ui.autocomplete.filter = function (array, term) {
+    var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+    return $.grep(array, function (value) {
+        return matcher.test(value.label || value.value || value);
+    });
+};
+
+//Highlight the word
+$.ui.autocomplete.prototype._renderItem = function (ul, item) {
+    item.label = item.label.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" +
+        $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi"),
+        "<strong>$1</strong>");
+    return $("<li></li>")
+        .data("item.autocomplete", item)
+        .append("<a>" + item.label + "</a>")
+        .appendTo(ul);
+};
