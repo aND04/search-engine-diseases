@@ -30,8 +30,7 @@ var Disease = {
     getAllDiseases: function (req, result) {
         var sql = "SELECT DISTINCT disease.description " +
             "FROM dbpedia_disease disease, pubmed_article_dbpedia_disease pubD " +
-            "WHERE disease.id = pubD.dbpedia_disease_id " +
-            "AND disease.description LIKE " + "'" + req + "%'";
+            "WHERE disease.id = pubD.dbpedia_disease_id";
 
         db.query(sql, function (err, res) {
             if (err) {

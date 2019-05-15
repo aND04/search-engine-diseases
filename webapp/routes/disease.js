@@ -18,12 +18,10 @@ router.post('/', function (req, res) {
     });
 });
 
-router.get('/getDiseases/:searches', function (req, res) {
+router.get('/getDiseases', function (req, res) {
     const term = req.query.term;
-    console.log("searches: " + term);
 
     Disease.getAllDiseases(term, function (err, queryRes) {
-        console.log("queryRes: " + queryRes);
         if (err) {
             res.status(400).json(err);
         } else {

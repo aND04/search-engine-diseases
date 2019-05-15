@@ -1,38 +1,39 @@
-// inicia o script
-$(document).ready(
-    function () {
-
-    }
-)
+//Routing
 var domain = "http://localhost:3000/";
-
-//faz ligação ha pasta routes
 var autocomplete = 'disease/getDiseases';
 
-function final() {
-    $('#myInput').autocomplete({
-        source: function (req, res) {
-            $.ajax({
-                url: domain + autocomplete + "/"+  $('#myInput').val(),
-                dataType: "json",
-                method: "GET",
-                data: {
-                    term: $('#myInput').val()
-                },
-                success: function(data) {
-                    res($.map(data, function(item) {
-                        console.log(item.description);
-                        return item.description;
-                    }));
-                },
-                error: function(xhr) {
-                    alert(xhr.status + ' : ' + xhr.statusText);
-                }
-            })
+/**
+ * Get all diseases.
+ * @returns Array with all diseases.
+ */
+async function getAllDiseases() {
+    var diseases = [];  //Store the diseases
+    $.ajax({
+        url: domain + autocomplete,
+        dataType: "json",
+        method: "GET",
+        success: function(data) {
+            $.map(data, function(item) {
+                diseases.push(item.description);
+            });
         },
-        select: function(event, ui) {
-
+        error: function(xhr) {
+            alert(xhr.status + ' : ' + xhr.statusText);
         }
-
     })
+    return diseases;
+}
+
+/**
+ * Gets the array of diseases and calls autocomplete function.
+ * @returns {Promise<void>}
+ */
+async function autocompleteDisease() {
+    var storeDiseases = await getAllDiseases();
+    $('#myInput').autocomplete({
+        source: storeDiseases,
+        autofocus: true,
+        select: function(event, ui) {
+        }
+    });
 }
