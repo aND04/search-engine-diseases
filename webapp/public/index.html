@@ -15,7 +15,7 @@
     <title>Search Engine Diseases</title>
 </head>
 
-<body>
+<body onload="final()">
 <!-- Header Section -->
 <header>
     <div class="head1">Search Engine Diseases</div>
@@ -28,7 +28,7 @@
     <!-- Button search -->
     <span class = "body_sec">
         <br>
-        <form id="disease" action="javascript:void(0);" autocomplete="off" oninput="final();">
+        <form id="disease" autocomplete="off">
     <span class="autocomplete">
     Disease: <input type="text" name="disease_name" id="myInput" type="text" name="diseaseAutocomplete" placeholder="Search">
     Top: <input type="number" name="topn">

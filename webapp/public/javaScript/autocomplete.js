@@ -13,11 +13,11 @@ function final() {
     $('#myInput').autocomplete({
         source: function (req, res) {
             $.ajax({
-                url: domain + autocomplete + "/"+  req.term,
+                url: domain + autocomplete + "/"+  $('#myInput').val(),
                 dataType: "json",
                 method: "GET",
                 data: {
-                    term: req.term
+                    term: $('#myInput').val()
                 },
                 success: function(data) {
                     res($.map(data, function(item) {
