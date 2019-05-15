@@ -10,7 +10,7 @@ router.post('/', function (req, res) {
 
     Metadata.getMetadata(data, function (err, queryRes) {
         if (err) {
-            res.status(400).json(err);
+            res.status(404).json(err);
         } else {
             res.status(200).json(queryRes);
         }
