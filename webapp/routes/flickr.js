@@ -3,10 +3,10 @@ var router = express.Router();
 var Flickr = require('../models/flickr');
 
 router.post('/', function (req, res) {
-
+    //Store the request params
     var data = {
-        Disease: req.body.disease_name,
-        Topn: req.body.topn
+        disease: req.body.disease,  //Disease name
+        topN: req.body.topN        //Number of photos to show
     };
 
     Flickr.getTopNMostRecentFlickPhotos(data, function (err, queryRes) {
@@ -14,7 +14,6 @@ router.post('/', function (req, res) {
             res.status(400).json(err);
         } else {
             res.status(200).json(queryRes);
-
         }
     });
 });

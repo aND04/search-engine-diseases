@@ -3,24 +3,19 @@ var router = express.Router();
 var Article = require('../models/article');
 
 router.post('/', function (req, res) {
-
+  //Store the request params
   var data = {
-    Disease: req.body.disease_name,
-    Topn: req.body.topn
+    disease: req.body.disease,  //Disease name
+    topN: req.body.topN        //Number of articles to show
   };
 
-
-  Article.getTopNRelatedArticles(data, function (err, queryRes) {
-
+  Article.getTopNRelatedArticles(data,function (err, queryRes) {
     if (err) {
       res.status(400).json(err);
     } else {
       res.status(200).json(queryRes);
-
     }
   });
-
-
-})
+});
 
 module.exports = router;

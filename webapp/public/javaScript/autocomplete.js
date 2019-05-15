@@ -7,7 +7,7 @@ $(document).ready(
 var domain = "http://localhost:3000/";
 
 //faz ligação ha pasta routes
-var autocomplete = 'autocomplete';
+var autocomplete = 'disease/getDiseases';
 
 function final() {
     $('#myInput').autocomplete({
@@ -36,4 +36,3 @@ function final() {
 
     })
 }
-

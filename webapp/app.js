@@ -12,7 +12,6 @@ var Tweet = require('./routes/tweet');
 var Flickr = require('./routes/flickr');
 var Metadata = require('./routes/metadata');
 var Disease = require('./routes/disease');
-var Autocomplete = require('./routes/autocomplete');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,8 +29,7 @@ app.use('/tweet', Tweet);
 app.use('/flickr', Flickr);
 app.use('/metadata', Metadata);
 app.use('/disease', Disease);
-app.use('/autocomplete', Autocomplete);
-/**
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -46,6 +44,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-}); */
+});
 
 module.exports = app;

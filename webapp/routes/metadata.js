@@ -3,9 +3,9 @@ var router = express.Router();
 var Metadata = require('../models/metadata');
 
 router.post('/', function (req, res) {
-
+    //Store the request params
     var data = {
-        Disease: req.body.disease_name
+        disease: req.body.disease,  //Disease name
     };
 
     Metadata.getMetadata(data, function (err, queryRes) {
@@ -13,7 +13,6 @@ router.post('/', function (req, res) {
             res.status(400).json(err);
         } else {
             res.status(200).json(queryRes);
-
         }
     });
 });
