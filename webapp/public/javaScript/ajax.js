@@ -47,7 +47,7 @@ function post() {
                     '</ul>' +
                     '</div>' +
                     '</td><td> <a target="_blank" href= https://www.ncbi.nlm.nih.gov/pubmed/' + item.pubmed_id + '> https://www.ncbi.nlm.nih.gov/pubmed/ ' + item.pubmed_id + '</a></td>' +
-                    '<td>' + item.pub_Date + '</td></tr>';
+                    '<td>' + new Date(item.pub_Date).toUTCString() + '</td></tr>';
             });
 
             // limpar as linhas
@@ -88,7 +88,7 @@ function post() {
             //escreve as linhas na tabela
             var trHTML = '';
             $.each(result_tweet, function (i, item) {
-                trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.description))) + '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + item.tweet_date + '</td></tr>';
+                trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.description))) + '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + new Date(item.tweet_date).toUTCString() + '</td></tr>';
             });
 
             // limpar as linhas
@@ -112,7 +112,7 @@ function post() {
             var trHTML = '';
             $.each(result_flickr, function (i, item) {
                 trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.title))) +
-                    '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + item.created_at + '</td></tr>';
+                    '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + new Date(item.flickr_date).toUTCString() + '</td></tr>';
             });
 
             // limpar as linhas
