@@ -135,7 +135,7 @@ function post() {
             }
 
             //criar o titulo das colunas
-            var titles = '<tr> <em>Twitter photos</em><th>Description</th> <th>URL</th> <th>Date</th> </tr>';
+            var titles = '<tr> <em>Twitter tweets</em><th>Description</th> <th>URL</th> <th>Date</th> </tr>';
 
             //escreve as linhas na tabela
             var trHTML = '';
@@ -183,7 +183,7 @@ function post() {
             var trHTML = '';
             $.each(flickrList, function (i, item) {
                 trHTML += '<tr><td><span itemprop="name">' + decodeURIComponent(escape(window.atob(item.title))) +
-                    '</span></td><td><span itemprop="url"> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></span></td><td><span  itemprop="datePublished"> ' + item.flickr_date + ' </span></td></tr>';
+                    '</span></td><td><span itemprop="url"> <img src="' + item.url + '">  ' + '</a></span></td><td><span  itemprop="datePublished"> ' + item.flickr_date + ' </span></td></tr>';
             });
 
             // limpar as linhas

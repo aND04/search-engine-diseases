@@ -9,7 +9,7 @@
 body {
     margin: 0 auto;
     background-size: contain;
-    background: aliceblue;
+    background: rgba(11, 5, 5, 0.07);
 }
 
 .autocomplete{
@@ -41,6 +41,8 @@ th{
     font-size: 14px;
     text-align: left;
     padding: 8px;
+    color: white;
+    background-color: #0088cc;
 }
 
 td{
@@ -48,3 +50,31 @@ td{
     text-align: left;
     padding: 8px;
 }
+
+.previous {
+    background-color: #0088cc;
+    color: #fdfdfe;
+
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+a:hover {
+    background-color:  #2d62d3;
+    color: #fdfdfe;
+}
+
+i:hover {
+    color: #0088cc;
+}
+
+
