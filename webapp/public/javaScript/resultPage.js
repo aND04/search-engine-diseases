@@ -64,22 +64,22 @@ function post() {
             }
 
             //criar o titulo das colunas
-            var titles = '<th>Title</th><th>Abstract</th><th>Pubmed</th><th>Date</th>th>Rate</th>';
+            var titles = '<th>Title</th><th>Abstract</th><th>Pubmed</th><th>Date</th><th>Rate</th>';
 
             //escreve as linhas na tabela
             var trHTML = '';
             $.each(articleList, function (i, item) {
-                trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.title))) +
-                    '</td><td>' + decodeURIComponent(escape(window.atob(item.abstract))) +
-                    '</td><td> <a target="_blank" onclick="implicitFeed()" href= https://www.ncbi.nlm.nih.gov/pubmed/' + item.pubmed_id + '> https://www.ncbi.nlm.nih.gov/pubmed/ ' + item.pubmed_id + '</a></td>' +
-                    '<td>' + item.pub_Date + '</td></tr>' +
-                    '<td>' + '<ul id=\'thumbs\ \text-left\' style="font-size:40px;width:min-content;alignment:left">' +
+                trHTML += '<tr><td><span itemprop="name">' + decodeURIComponent(escape(window.atob(item.title))) +
+                    '</span></td><td><span itemprop="about">' + decodeURIComponent(escape(window.atob(item.abstract))) +
+                    '</span></td><td> <span itemprop="url"><a target="_blank" onclick="implicitFeed()" href= https://www.ncbi.nlm.nih.gov/pubmed/' + item.pubmed_id + '> https://www.ncbi.nlm.nih.gov/pubmed/ ' + item.pubmed_id + '</a></td>' +
+                    '<td><span itemprop="datePublished">' + item.pub_Date + '</span></td>' +
+                    '<td><span itemprop="contentRating">' + '<ul id=\'thumbs\ \text-left\' style="font-size:40px;width:min-content;alignment:left">' +
                     '<span class=\'up\' title=\'LIKE\' >' +
                     '<br>' +
                     '<i class="fa fa-thumbs-o-up" onclick="increaseExpFeed('+item.pubmed_id+'); changeColorUp(this);">' + '</i></span>' +
                     '<span class=\'down\' title=\'DISLIKE\'">' +
                     '<i class="fa fa-thumbs-o-down" onclick="decreaseExpFeed('+item.pubmed_id+'); changeColorDown(this);">' + '</i></span>' +
-                    '</ul>' + '</td></tr>';
+                    '</ul>' + '</span></td></tr>';
             });
 
             // limpar as linhas
@@ -140,7 +140,7 @@ function post() {
             //escreve as linhas na tabela
             var trHTML = '';
             $.each(tweetsList, function (i, item) {
-                trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.description))) + '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + item.tweet_date + '</td></tr>';
+                trHTML += '<tr><td><span itemprop="about">' + decodeURIComponent(escape(window.atob(item.description))) + '</span></td><td><span itemprop="url"> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a> </span></td><td>' + item.tweet_date + '</td></tr>';
             });
 
             // limpar as linhas
@@ -182,8 +182,8 @@ function post() {
             //escreve as linhas na tabela
             var trHTML = '';
             $.each(flickrList, function (i, item) {
-                trHTML += '<tr><td>' + decodeURIComponent(escape(window.atob(item.title))) +
-                    '</td><td> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></td><td>' + item.flickr_date + '</td></tr>';
+                trHTML += '<tr><td><span itemprop="name">' + decodeURIComponent(escape(window.atob(item.title))) +
+                    '</span></td><td><span itemprop="url"> <a target="_blank" href="' + item.url + '">  ' + item.url + '</a></span></td><td><span  itemprop="datePublished"> ' + item.flickr_date + ' </span></td></tr>';
             });
 
             // limpar as linhas
@@ -225,9 +225,9 @@ function post() {
             //escreve as linhas na tabela
             var trHTML = '';
             $.each(metadataList, function (i, item) {
-                trHTML += '<tr><td>' + item.wikipageId +
-                    '</td><td> <a target="_blank" href="' + item.uri + '">  ' + item.uri + '</a></td><td>  ' +
-                    '<img src="' + item.image + '" width="420" height="420"> </td><td>' + decodeURIComponent(escape(window.atob(item.comment))) + '</td></tr>';
+                trHTML += '<tr><td><span itemprop="speakable">' + item.wikipageId +
+                    '</span></td><td><span itemprop="identifier"> <a target="_blank" href="' + item.uri + '">  ' + item.uri + '</a></span></td><td><span  itemprop="image">  ' +
+                    '<img src="' + item.image + '" width="420" height="420"></span></td><td><span itemprop="about">' + decodeURIComponent(escape(window.atob(item.comment))) + '</span></td></tr>';
             });
 
             // limpar as linhas
@@ -266,8 +266,8 @@ function post() {
             //escreve as linhas na tabela
             var trHTML = '';
             $.each(relatedDiseasesList, function (i, item) {
-                trHTML += '<tr><td>' + item.dbpedia_disease_id +
-                    '</td><td>'+ item.description + '</td></tr>';
+                trHTML += '<tr><td><span itemprop="speakable">' + item.dbpedia_disease_id +
+                    '</spans></td><td><span itemprop="name">'+ item.description + '</span></td></tr>';
             });
 
             // limpar as linhas
