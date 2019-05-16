@@ -26,7 +26,7 @@ async function getAllDiseases() {
             } else if (type == 'application/xml') {
                 $(data).find('disease').each(function() {
                     diseases.push($(this).find('description').text());
-                })
+                });
                 diseases.shift();
             }
         },

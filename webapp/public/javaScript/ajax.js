@@ -240,13 +240,19 @@ function post() {
         success: function (result_disease) {
             if (type == 'application/json') {
                 $.map(result_disease, function(item) {
-                    relatedDiseasesList.push(item.description);
+                    relatedDiseasesList.push({
+                        'dbpedia_disease_id': item.dbpedia_disease_id,
+                        'description': item.description
+                    });
                 });
                 //Parse XML
             } else if (type == 'application/xml') {
                 $(result_disease).find('disease').each(function() {
-                    relatedDiseasesList.push($(this).find('description').text());
-                })
+                    relatedDiseasesList.push({
+                        'dbpedia_disease_id': $(this).find('dbpedia_disease_id').text(),
+                        'description': $(this).find('description').text()
+                    });
+                });
                 relatedDiseasesList.shift();
             }
 
