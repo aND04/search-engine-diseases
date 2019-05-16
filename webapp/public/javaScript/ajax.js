@@ -12,6 +12,8 @@ var tweetResource = "tweet";
 var flickrResource = "flickr";
 var metadataResource = "metadata";
 var diseaseResource = "disease";
+var articleResourceFeedbackIncrease = "article/increaseExpFeed";
+var articleRescourceFeedbackDecrease = "article/decreaseExpFeed";
 
 //inicializa o metodo post do botão registar
 
@@ -72,9 +74,9 @@ function post() {
                     '<td>' + '<ul id=\'thumbs\ \text-left\' style="font-size:40px;width:min-content;alignment:left">' +
                     '<span class=\'up\' title=\'LIKE\' >' +
                     '<br>' +
-                    '<i class="fa fa-thumbs-o-up" onclick="increaseExpFeed()">' + '</i></span>' +
+                    '<i class="fa fa-thumbs-o-up" onclick="increaseExpFeed('+item.pubmed_id+')">' + '</i></span>' +
                     '<span class=\'down\' title=\'DISLIKE\'">' +
-                    '<i class="fa fa-thumbs-o-down" onclick="decreaseExpFeed()" ' + '</i></span>' +
+                    '<i class="fa fa-thumbs-o-down" onclick="decreaseExpFeed('+item.pubmed_id+')">' + '</i></span>' +
                     '</ul>' + '</td></tr>';
             });
 
@@ -274,13 +276,39 @@ function post() {
 }
 
 function implicitFeed(){
-    
-}
-
-function increaseExpFeed() {
 
 }
 
-function decreaseExpFeed() {
+function increaseExpFeed(pubmed_id) {
+    $.ajax({
+        url: domain + articleResourceFeedbackIncrease + "/" + pubmed_id,
+        data: {
+            pubmed: pubmed_id,
+            requestType: 'application/json'
+        },
+        method: "GET",
+        success: function (result_for_feedback) {
+            console.log("updated explicit feedback");
+            /*$.each(result_for_feedback, function (i, item) {
+                console.log("status updated!!!" + item);
+            });*/
+        }
+    })
+}
 
-    }
+function decreaseExpFeed(pubmed_id) {
+    $.ajax({
+        url: domain + articleRescourceFeedbackDecrease + "/" + pubmed_id,
+        data: {
+            pubmed: pubmed_id,
+            requestType: 'application/json'
+        },
+        method: "GET",
+        success: function (result_for_feedback) {
+            console.log("updated explicit feedback");
+            /*$.each(result_for_feedback, function (i, item) {
+                console.log("status updated!!!" + item);
+            });*/
+        }
+    })
+}

@@ -37,5 +37,65 @@ router.post('/', function (req, res) {
         }
     });
 });
+router.get('/increaseExpFeed/:pubmedId', function (req, res) {
+    let pubmed = req.query.pubmed;
+    let requestType = req.query.requestType;
+
+    Article.increaseExpFeed(pubmed, function (err, queryRes) {
+        if (err) {
+            var statusCode = 404;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+            res.setHeader('Content-Type', 'application/json');
+            res.json({'error': 'Error getting related articles!'});
+        } else {
+            var reqContentType = requestType;
+            var statusCode = 200;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+
+            if (reqContentType == 'application/json') {
+                res.setHeader('Content-Type', 'application/json');
+                console.log("jsonQuery: " + queryRes);
+                res.json(queryRes);
+            } else if (reqContentType == 'application/xml') {
+                var xmlResponse = js2xmlparser.parse("article", queryRes);
+                res.setHeader('Content-Type', 'application/xml');
+                res.write(xmlResponse);
+                res.end();
+            }
+        }
+    })
+});
+
+router.get('/decreaseExpFeed/:pubmedId', function (req, res) {
+    let pubmed = req.query.pubmed;
+    let requestType = req.query.requestType;
+
+    Article.decreaseExpFeed(pubmed, function (err, queryRes) {
+        if (err) {
+            var statusCode = 404;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+            res.setHeader('Content-Type', 'application/json');
+            res.json({'error': 'Error getting related articles!'});
+        } else {
+            var reqContentType = requestType;
+            var statusCode = 200;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+
+            if (reqContentType == 'application/json') {
+                res.setHeader('Content-Type', 'application/json');
+                res.json(queryRes);
+            } else if (reqContentType == 'application/xml') {
+                var xmlResponse = js2xmlparser.parse("article", queryRes);
+                res.setHeader('Content-Type', 'application/xml');
+                res.write(xmlResponse);
+                res.end();
+            }
+        }
+    })
+})
 
 module.exports = router;

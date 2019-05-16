@@ -130,7 +130,7 @@ exports.annotation = async function () {
     }
 
     //Normalize relevance values
-    console.log("Normalizing relevance values...");
+   /* console.log("Normalizing relevance values...");
     const tfidfMax = await pubmedService.getMaxRelevance('tfidf');
     const tfidfMin = await pubmedService.getMinRelevance('tfidf');
     await pubmedService.normalizeRelevance('tfidf', tfidfMax,  tfidfMin);
@@ -140,7 +140,7 @@ exports.annotation = async function () {
     const implicitFeedbackMax = await pubmedService.getMaxRelevance('implicitFeedbackValue');
     const implicitFeedbackMin = await pubmedService.getMinRelevance('implicitFeedbackValue');
     await pubmedService.normalizeRelevance('implicitFeedbackValue', implicitFeedbackMax, implicitFeedbackMin);
-
+*/
     //Weighted average of previous values
     let percentages = await pubmedService.getPercentages();
     let tfidfRelValue = percentages.tfidfPer;
