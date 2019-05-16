@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Flickr = require('../models/flickr');
+var StatusMessage = require('./status');
 
 router.post('/', function (req, res) {
     //Store the request params
@@ -10,10 +11,19 @@ router.post('/', function (req, res) {
     };
 
     Flickr.getTopNMostRecentFlickPhotos(data, function (err, queryRes) {
+        var contentType = 'application/json';  //TODO
         if (err) {
-            res.status(404).json(err);
+            var statusCode = 404;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+            res.setHeader('Content-Type', contentType);
+            res.json(err);
         } else {
-            res.status(200).json(queryRes);
+            var statusCode = 200;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+            res.setHeader('Content-Type', contentType);
+            res.json(queryRes);
         }
     });
 });

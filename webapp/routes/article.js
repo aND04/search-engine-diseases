@@ -1,22 +1,31 @@
 var express = require('express');
 var router = express.Router();
 var Article = require('../models/article');
+var StatusMessage = require('./status');
 
 router.post('/', function (req, res) {
-  //Store the request params
-  var data = {
-    disease: req.body.disease_name,  //Disease name
-    topN: req.body.topn              //Number of articles to show
-  };
+    //Store the request params
+    var data = {
+        disease: req.body.disease_name,  //Disease name
+        topN: req.body.topn              //Number of articles to show
+    };
 
-  Article.getTopNRelatedArticles(data,function (err, queryRes) {
-    if (err) {
-      console.log(data);
-      res.status(404).json(err);
-    } else {
-      res.status(200).json(queryRes);
-    }
-  });
+    Article.getTopNRelatedArticles(data,function (err, queryRes) {
+        var contentType = 'application/json';  //TODO
+        if (err) {
+            var statusCode = 404;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+            res.setHeader('Content-Type', contentType);
+            res.json(err);
+        } else {
+            var statusCode = 200;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+            res.setHeader('Content-Type', contentType);
+            res.json(queryRes);
+        }
+    });
 });
 
 module.exports = router;

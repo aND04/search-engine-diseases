@@ -1,4 +1,3 @@
-
 var db = require('./dbConnection');
 
 /** Model with the article queries. */
@@ -17,7 +16,6 @@ var Article = {
 
         db.query(sql, function (err, res) {
             if (err) {
-                console.log(err);
                 result(err, null);
             } else {
                 result(null, res);

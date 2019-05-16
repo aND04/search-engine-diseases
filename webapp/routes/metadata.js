@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Metadata = require('../models/metadata');
+var StatusMessage = require('./status');
 
 router.post('/', function (req, res) {
     //Store the request params
@@ -9,10 +10,19 @@ router.post('/', function (req, res) {
     };
 
     Metadata.getMetadata(data, function (err, queryRes) {
+        var contentType = 'application/json';  //TODO
         if (err) {
-            res.status(404).json(err);
+            var statusCode = 404;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+            res.setHeader('Content-Type', contentType);
+            res.json(err);
         } else {
-            res.status(200).json(queryRes);
+            var statusCode = 200;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+            res.setHeader('Content-Type', contentType);
+            res.json(queryRes);
         }
     });
 });
