@@ -16,7 +16,7 @@ var articleResourceFeedbackIncrease = "article/increaseExpFeed";
 var articleRescourceFeedbackDecrease = "article/decreaseExpFeed";
 
 //inicializa o metodo post do botão registar
-
+var diseaseNameGlob;
 
 function post() {
 
@@ -24,6 +24,7 @@ function post() {
 
     // vai buscar o id registo e vai enviar para dentro do post
     var diseaseName = localStorage.getItem("disease");
+    diseaseNameGlob=diseaseName;
     var data = 'disease_name=' + diseaseName + '&topn=' + localStorage.getItem("topn") +
         '&requestType=' + type;
 
@@ -285,6 +286,7 @@ function increaseExpFeed(pubmed_id) {
         url: domain + articleResourceFeedbackIncrease + "/" + pubmed_id,
         data: {
             pubmed: pubmed_id,
+            diseaseN: diseaseNameGlob,
             requestType: 'application/json'
         },
         method: "GET",
@@ -302,6 +304,7 @@ function decreaseExpFeed(pubmed_id) {
         url: domain + articleRescourceFeedbackDecrease + "/" + pubmed_id,
         data: {
             pubmed: pubmed_id,
+            diseaseN: diseaseNameGlob,
             requestType: 'application/json'
         },
         method: "GET",

@@ -38,10 +38,12 @@ router.post('/', function (req, res) {
     });
 });
 router.get('/increaseExpFeed/:pubmedId', function (req, res) {
-    let pubmed = req.query.pubmed;
+    let pubmedID = req.query.pubmed;
+    let diseaseN = req.query.diseaseN;
+    let data = {pubmed: pubmedID, diseaseN: diseaseN};
     let requestType = req.query.requestType;
 
-    Article.increaseExpFeed(pubmed, function (err, queryRes) {
+    Article.increaseExpFeed(data, function (err, queryRes) {
         if (err) {
             var statusCode = 404;
             res.status(statusCode);
@@ -69,10 +71,12 @@ router.get('/increaseExpFeed/:pubmedId', function (req, res) {
 });
 
 router.get('/decreaseExpFeed/:pubmedId', function (req, res) {
-    let pubmed = req.query.pubmed;
+    let pubmedID = req.query.pubmed;
+    let diseaseN = req.query.diseaseN;
+    let data = {pubmed: pubmedID, diseaseN: diseaseN};
     let requestType = req.query.requestType;
 
-    Article.decreaseExpFeed(pubmed, function (err, queryRes) {
+    Article.decreaseExpFeed(data, function (err, queryRes) {
         if (err) {
             var statusCode = 404;
             res.status(statusCode);

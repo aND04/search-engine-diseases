@@ -23,7 +23,7 @@ var Article = {
         });
     },
     increaseExpFeed: function(req, result){
-        let sqlQuery = "select PADD.pubmed_article_id as a_id, PADD.dbpedia_disease_id as d_id from pubmed_article PA, pubmed_article_dbpedia_disease PADD where PA.pubmed_id=" + req + " AND PA.id = PADD.pubmed_article_id";
+        let sqlQuery = "select PADD.pubmed_article_id as a_id, PADD.dbpedia_disease_id as d_id from dbpedia_disease dd, pubmed_article PA, pubmed_article_dbpedia_disease_mentions PADD where dd.description=" + "'" + req.diseaseN + "' and  PA.pubmed_id="+req.pubmed+" AND PA.id = PADD.pubmed_article_id AND dd.id = PADD.dbpedia_disease_id";
         db.query(sqlQuery, function (err, res) {
             if (err) {
                 console.log(err);
@@ -70,7 +70,7 @@ var Article = {
 
     },
     decreaseExpFeed: function(req, result) {
-        let sqlQuery = "select PADD.pubmed_article_id as a_id, PADD.dbpedia_disease_id as d_id from pubmed_article PA, pubmed_article_dbpedia_disease PADD where PA.pubmed_id=" + req + " AND PA.id = PADD.pubmed_article_id";
+        let sqlQuery = "select PADD.pubmed_article_id as a_id, PADD.dbpedia_disease_id as d_id from dbpedia_disease dd, pubmed_article PA, pubmed_article_dbpedia_disease_mentions PADD where dd.description=" + "'" + req.diseaseN + "' and  PA.pubmed_id="+req.pubmed+" AND PA.id = PADD.pubmed_article_id AND dd.id = PADD.dbpedia_disease_id";
         db.query(sqlQuery, function (err, res) {
             if (err) {
                 console.log(err);
