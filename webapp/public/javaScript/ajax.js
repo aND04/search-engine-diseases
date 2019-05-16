@@ -18,7 +18,7 @@ var diseaseResource = "disease";
 
 function post() {
     // vai buscar o id registo e vai enviar para dentro do post
-    var data = $("#disease").serialize();
+    var data = $("#disease").serialize() + '&requestType=application/json';
     var diseaseName = $("#myInput").val();
 
     //pedido AJAX artigo

@@ -8,10 +8,12 @@ var autocomplete = 'disease/getDiseases';
  */
 async function getAllDiseases() {
     var diseases = [];  //Store the diseases
+    var content = {contentType: 'application/json'};
     $.ajax({
         url: domain + autocomplete,
         dataType: "json",
         method: "GET",
+        data: content,
         success: function(data) {
             $.map(data, function(item) {
                 diseases.push(item.description);

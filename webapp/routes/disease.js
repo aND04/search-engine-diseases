@@ -11,40 +11,52 @@ router.post('/', function (req, res) {
     };
 
     Disease.getTopNRelatedDiseases(data, function (err, queryRes) {
-        var contentType = 'application/json';  //TODO
         if (err) {
             var statusCode = 404;
             res.status(statusCode);
             res.statusMessage = StatusMessage.getStatusMessage(statusCode);
-            res.setHeader('Content-Type', contentType);
-            res.json(err);
+            res.setHeader('Content-Type', 'application/json');
+            res.json({'error': 'Error getting related diseases!'});
         } else {
+            var reqContentType = req.body.requestType;
             var statusCode = 200;
             res.status(statusCode);
             res.statusMessage = StatusMessage.getStatusMessage(statusCode);
-            res.setHeader('Content-Type', contentType);
-            res.json(queryRes);
+
+            if (reqContentType == 'application/json') {
+                res.setHeader('Content-Type', 'application/json');
+                res.json(queryRes);
+            } else if (reqContentType == 'application/xml') {
+                var xmlResponse = js2xmlparser.parse("disease", queryRes);
+                res.setHeader('Content-Type', 'application/xml');
+                res.write(xmlResponse);
+            }
         }
     });
 });
 
 router.get('/getDiseases', function (req, res) {
-    const term = req.query.term;
-
-    Disease.getAllDiseases(term, function (err, queryRes) {
-        var contentType = 'application/json';  //TODO
+    Disease.getAllDiseases(req, function (err, queryRes) {
         if (err) {
             var statusCode = 404;
             res.status(statusCode);
             res.statusMessage = StatusMessage.getStatusMessage(statusCode);
-            res.setHeader('Content-Type', contentType);
-            res.json(err);
+            res.setHeader('Content-Type', 'application/json');
+            res.json({'error': 'Error getting diseases for autocomplete!'});
         } else {
+            var reqContentType = req.query.contentType;
             var statusCode = 200;
             res.status(statusCode);
             res.statusMessage = StatusMessage.getStatusMessage(statusCode);
-            res.setHeader('Content-Type', contentType);
-            res.json(queryRes);
+
+            if (reqContentType == 'application/json') {
+                res.setHeader('Content-Type', 'application/json');
+                res.json(queryRes);
+            } else if (reqContentType == 'application/xml') {
+                var xmlResponse = js2xmlparser.parse("disease", queryRes);
+                res.setHeader('Content-Type', 'application/xml');
+                res.write(xmlResponse);
+            }
         }
     });
 });
