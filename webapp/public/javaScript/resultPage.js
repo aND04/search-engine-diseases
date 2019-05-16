@@ -19,12 +19,13 @@ var articleRescourceFeedbackDecrease = "article/decreaseExpFeed";
 
 
 function post() {
-    //TODO: replace with user choice input
-    var type = 'application/json';
+
+    var type = 'application/' + localStorage.getItem("contentType");
 
     // vai buscar o id registo e vai enviar para dentro do post
-    var data = $("#disease").serialize() + '&requestType=' + type;
-    var diseaseName = $("#myInput").val();
+    var diseaseName = localStorage.getItem("disease");
+    var data = 'disease_name=' + diseaseName + '&topn=' + localStorage.getItem("topn") +
+        '&requestType=' + type;
 
     var articleList = [];           //Articles
     var tweetsList = [];            //Tweets
@@ -311,4 +312,8 @@ function decreaseExpFeed(pubmed_id) {
             });*/
         }
     })
+}
+
+function goBack() {
+    window.history.back();
 }
