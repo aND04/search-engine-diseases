@@ -1,0 +1,154 @@
+<section id="api-article">
+
+  <div class="card">
+    <div class="card-content">
+
+      <table class="striped">
+          <thead>
+            <tr>
+                <th>Type</th>
+                <th>Address</th>
+                <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="new badge red" data-badge-caption="">
+                  GET
+                </span>
+              </td>
+              <td>/article</td>
+              <td>Fetches articles based on some ideas</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul class="collection with-header">
+          <li class="collection-header">
+            <h6>Queries</h6>
+          </li>
+          <li class="collection-item">
+            <table>
+                <thead>
+                  <tr>
+                      <th>name</th>
+                      <th>type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      disease_name
+                    </td>
+                    <td>
+                      string
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </li>
+        </ul>
+
+    </div>
+    <div class="card-tabs">
+      <ul class="tabs tabs-fixed-width">
+        <li class="tab"><a href="#apisuccess-1">Success Response</a></li>
+        <li class="tab"><a class="active" href="#apierror-1">Error Response</a></li>
+        <li class="tab"><a href="#apiexample-1">Example</a></li>
+      </ul>
+    </div>
+    <div class="card-content grey lighten-4">
+      <div id="apisuccess-1">
+        <table class="striped">
+            <thead>
+              <tr>
+                  <th>Type</th>
+                  <th>Code</th>
+                  <th>Reponse</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="new badge teal" data-badge-caption="">
+                    JSON
+                  </span>
+                </td>
+                <td>200</td>
+                <td>
+                  <pre>
+                    <code class="json">
+                      {
+
+                      }
+                    </code>
+                  </pre>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="new badge lime darken-2" data-badge-caption="">
+                    XML
+                  </span>
+                </td>
+                <td>200</td>
+                <td>
+                  <pre>
+                    <code class="xml">
+                      <
+
+                      >
+                    </code>
+                  </pre>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div id="apierror-1">
+        <table class="striped">
+            <thead>
+              <tr>
+                  <th>Type</th>
+                  <th>Code</th>
+                  <th>Reponse</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="new badge teal" data-badge-caption="">
+                    JSON
+                  </span>
+                </td>
+                <td>404</td>
+                <td>
+                  <pre>
+                    <code class="json">
+                      {
+                        message: 'Error getting related diseases!'
+                      }
+                    </code>
+                  </pre>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div id="apiexample-1">
+        Test 3
+      </div>
+    </div>
+  </div>
+
+    <span class="new badge blue" data-badge-caption="">POST</span>
+</section>
+<section id="api-tweet">
+</section>
+<section id="api-flickr">
+</section>
+<section id="api-metadata">
+</section>
+<section id="api-disease">
+</section>
