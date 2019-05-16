@@ -31,15 +31,38 @@ var Article = {
             } else {
                 let artcile_id = res[0].a_id;
                 let disease_id = res[0].d_id;
-                let updateSql = "UPDATE relevance SET explicitFeedbackValue = explicitFeedbackValue + 1 where pubmed_article_id = "+artcile_id+" and dbpedia_disease_id=" + disease_id;
-                    db.query(updateSql, function (err, resp) {
-                        if (err) {
-                            console.log(err);
-                            result(err, null);
-                        }else{
-                            result(null, resp);
-                        }
-                    })
+                let updateSql = "UPDATE relevance SET explicitFeedbackValue = explicitFeedbackValue + 1 where pubmed_article_id = " + artcile_id + " and dbpedia_disease_id=" + disease_id;
+                db.query(updateSql, function (err, resp) {
+                    if (err) {
+                        console.log(err);
+                        result(err, null);
+                    } else {
+                        let sqlPercentages = "SELECT * FROM weighted_average_percentages"
+                        db.query(sqlPercentages, function(err, resposta){
+                            if (err) {
+                                console.log(err);
+                                result(err, null);
+                            } else {
+                                let tfidfRelValue = resposta[0].tfidfPer;
+                                let pubDateRelValue = resposta[0].pubDatePer;
+                                let similarityRelValue = resposta[0].similarityPer;
+                                let explicitFeedbackValue = resposta[0].explicitFeedbackPer;
+                                let implicitFeedbackValue = resposta[0].implicitFeedbackPer;
+                                let sqlUpdateAverage = "UPDATE relevance SET relevance_Avg = (tfidf * "+ tfidfRelValue+ ") + (similarity * "+ similarityRelValue + ") + (explicitFeedbackValue * " + explicitFeedbackValue +") + (implicitFeedbackValue * "
+                                    + implicitFeedbackValue + ") + (date_Relevance * " + pubDateRelValue +") WHERE pubmed_article_id=" + artcile_id + " AND dbpedia_disease_id=" + disease_id;
+                                db.query(sqlUpdateAverage, function (err, updateResp) {
+                                    if (err) {
+                                        console.log(err);
+                                        result(err, null);
+                                    }else{
+                                        result(null, updateResp);
+                                    }
+                                })
+                            }
+                        });
+                        //result(null, resp);
+                    }
+                })
                 console.log("res: " + res[0].a_id);
                 //result(null, res);
             }
@@ -61,7 +84,30 @@ var Article = {
                         console.log(err);
                         result(err, null);
                     } else {
-                        result(null, resp);
+                        let sqlPercentages = "SELECT * FROM weighted_average_percentages"
+                        db.query(sqlPercentages, function(err, resposta){
+                            if (err) {
+                                console.log(err);
+                                result(err, null);
+                            } else {
+                                let tfidfRelValue = resposta[0].tfidfPer;
+                                let pubDateRelValue = resposta[0].pubDatePer;
+                                let similarityRelValue = resposta[0].similarityPer;
+                                let explicitFeedbackValue = resposta[0].explicitFeedbackPer;
+                                let implicitFeedbackValue = resposta[0].implicitFeedbackPer;
+                                let sqlUpdateAverage = "UPDATE relevance SET relevance_Avg = (tfidf * "+ tfidfRelValue+ ") + (similarity * "+ similarityRelValue + ") + (explicitFeedbackValue * " + explicitFeedbackValue +") + (implicitFeedbackValue * "
+                                    + implicitFeedbackValue + ") + (date_Relevance * " + pubDateRelValue +") WHERE pubmed_article_id=" + artcile_id + " AND dbpedia_disease_id=" + disease_id;
+                                db.query(sqlUpdateAverage, function (err, updateResp) {
+                                    if (err) {
+                                        console.log(err);
+                                        result(err, null);
+                                    }else{
+                                        result(null, updateResp);
+                                    }
+                                })
+                            }
+                        });
+                        //result(null, resp);
                     }
                 })
                 console.log("res: " + res[0].a_id);
