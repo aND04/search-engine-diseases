@@ -32,6 +32,7 @@ router.post('/', function (req, res) {
                 var xmlResponse = js2xmlparser.parse("article", queryRes);
                 res.setHeader('Content-Type', 'application/xml');
                 res.write(xmlResponse);
+                res.end();
             }
         }
     });

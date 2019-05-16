@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Flickr = require('../models/flickr');
 var StatusMessage = require('./status');
+var js2xmlparser = require("js2xmlparser");
 
 router.post('/', function (req, res) {
     //Store the request params
@@ -30,6 +31,7 @@ router.post('/', function (req, res) {
                 var xmlResponse = js2xmlparser.parse("flickr", queryRes);
                 res.setHeader('Content-Type', 'application/xml');
                 res.write(xmlResponse);
+                res.end();
             }
         }
     });

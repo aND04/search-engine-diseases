@@ -7,22 +7,33 @@ var autocomplete = 'disease/getDiseases';
  * @returns Array with all diseases.
  */
 async function getAllDiseases() {
+    //TODO: replace with user choice input
+    var type = 'application/json';
+
     var diseases = [];  //Store the diseases
-    var content = {contentType: 'application/json'};
+    var content = {contentType: type};
     $.ajax({
         url: domain + autocomplete,
-        dataType: "json",
         method: "GET",
         data: content,
         success: function(data) {
-            $.map(data, function(item) {
-                diseases.push(item.description);
-            });
+            //Parse JSON
+            if (type == 'application/json') {
+                $.map(data, function(item) {
+                    diseases.push(item.description);
+                });
+            //Parse XML
+            } else if (type == 'application/xml') {
+                $(data).find('disease').each(function() {
+                    diseases.push($(this).find('description').text());
+                })
+                diseases.shift();
+            }
         },
         error: function(xhr) {
             alert(xhr.status + ' : ' + xhr.statusText);
         }
-    })
+    });
     return diseases;
 }
 

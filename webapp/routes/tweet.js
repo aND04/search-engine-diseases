@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Tweet = require('../models/tweet');
 var StatusMessage = require('./status');
+var js2xmlparser = require("js2xmlparser");
 
 router.post('/', function (req, res) {
     //Store the request params
