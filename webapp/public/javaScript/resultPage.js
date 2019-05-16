@@ -76,9 +76,9 @@ function post() {
                     '<td>' + '<ul id=\'thumbs\ \text-left\' style="font-size:40px;width:min-content;alignment:left">' +
                     '<span class=\'up\' title=\'LIKE\' >' +
                     '<br>' +
-                    '<i class="fa fa-thumbs-o-up" onclick="increaseExpFeed('+item.pubmed_id+')">' + '</i></span>' +
+                    '<i class="fa fa-thumbs-o-up" onclick="increaseExpFeed('+item.pubmed_id+'); changeColorUp(this);">' + '</i></span>' +
                     '<span class=\'down\' title=\'DISLIKE\'">' +
-                    '<i class="fa fa-thumbs-o-down" onclick="decreaseExpFeed('+item.pubmed_id+')">' + '</i></span>' +
+                    '<i class="fa fa-thumbs-o-down" onclick="decreaseExpFeed('+item.pubmed_id+'); changeColorDown(this);">' + '</i></span>' +
                     '</ul>' + '</td></tr>';
             });
 
@@ -320,3 +320,22 @@ function decreaseExpFeed(pubmed_id) {
 function goBack() {
     window.history.back();
 }
+
+//funçao de mudança de cor para não fazer click. Fica branco que não se vê alterações 
+function changeColorUp(_this) {
+    if (_this.style.backgroundColor !== "white"){
+        _this.style.backgroundColor = "white";
+    } else {
+        alert("Just one vote!");
+    }
+
+}
+function changeColorDown(_this) {
+    if (_this.style.backgroundColor !== "white"){
+        _this.style.backgroundColor = "white";
+    } else {
+        alert("Just one vote!");
+    }
+
+}
+
