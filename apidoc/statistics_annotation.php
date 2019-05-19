@@ -23,7 +23,6 @@
         </style>
         <script>
           $(document).ready(function(){
-              $('#api-content').append(html);
               $('.tabs').tabs();
           })
         </script>
