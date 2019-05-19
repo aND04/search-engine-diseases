@@ -33,8 +33,8 @@
 								<div class="col s12">
 									<ul class="tabs">
 										<li class="tab col s3"><a target="_self" href="index.html">API</a></li>
-										<li class="tab col s3"><a href="statistics_retrieval.php">Statistics Demo 1</a></li>
-										<li class="tab col s3"><a target="_self" class="active" href="statistics_annotation.php">Statistics Demo 2</a></li>
+										<li class="tab col s3"><a class="active" href="statistics_retrieval.php">Statistics Demo 1</a></li>
+										<li class="tab col s3"><a target="_self" href="statistics_annotation.php">Statistics Demo 2</a></li>
 									</ul>
 								</div>
 						</div>
