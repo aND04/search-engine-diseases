@@ -1,5 +1,5 @@
 //Routing
-var domain = "http://localhost:3000/";
+var domain = '/';
 var autocomplete = 'disease/getDiseases';
 
 /**

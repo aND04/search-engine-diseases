@@ -4,7 +4,7 @@ $(document).ready(
 
     }
 )
-var domain = "http://localhost:3000/";
+var domain = '/';
 
 //faz ligação ha pasta routes
 var articleResource = "article";
@@ -321,7 +321,7 @@ function goBack() {
     window.history.back();
 }
 
-//funçao de mudança de cor para não fazer click. Fica branco que não se vê alterações 
+//funçao de mudança de cor para não fazer click. Fica branco que não se vê alterações
 function changeColorUp(_this) {
     if (_this.style.backgroundColor !== "white"){
         _this.style.backgroundColor = "white";
@@ -338,4 +338,3 @@ function changeColorDown(_this) {
     }
 
 }
-
