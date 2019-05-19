@@ -5,29 +5,36 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="js/materialize.js"></script>
         <style>
-    		table, th, td {
-    		    border-collapse: collapse;
-                border-spacing: 0;
-                width: 100%;
-    		    border: 1px solid black;
-    		}
+        		table, th, td {
+        		    border-collapse: collapse;
+                    border-spacing: 0;
+                    width: 100%;
+        		    border: 1px solid black;
+        		}
 
-    		th, td {
-    		    text-align: center;
-    			border: 1px solid black;
-    			padding: 8px;
-    		}
+        		th, td {
+        		    text-align: center;
+        			border: 1px solid black;
+        			padding: 8px;
+        		}
         </style>
+        <script>
+          $(document).ready(function(){
+              $('#api-content').append(html);
+              $('.tabs').tabs();
+          })
+        </script>
     </head>
     <body class="grey lighten-5">
         <header>
             <div class="row">
                 <div class="col s12">
                   <ul class="tabs">
-                    <li class="tab col s3"><a target="_self" class="active" href="index.html">API</a></li>
-                    <li class="tab col s3"><a target="_self" href="statistics_retrieval.php">Statistics Demo 1</a></li>
+                    <li class="tab col s3"><a target="_self" href="index.html">API</a></li>
+                    <li class="tab col s3"><a target="_self" class="active" href="statistics_retrieval.php">Statistics Demo 1</a></li>
                     <li class="tab col s3"><a href="statistics_annotation.php">Statistics Demo 2</a></li>
                   </ul>
                 </div>
