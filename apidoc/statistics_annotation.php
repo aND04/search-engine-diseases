@@ -40,12 +40,14 @@
             </div>
         </header>
         <main>
-        <h1>Statistics - Demo II</h1>
-        <form action='statistics_annotation.php' method='get'>
-            <p> Disease: <input type='text' name='disease' /> </p>
-            <p><input type='submit' value='Submit'/> </p>
-        </form>
-        <hr>
+          <div class="row">
+              <div class="col s12">
+                <h1>Statistics - Demo II</h1>
+                <form action='statistics_annotation.php' method='get'>
+                    <p> Disease: <input type='text' name='disease' /> </p>
+                    <p><input type='submit' value='Submit'/> </p>
+                </form>
+                <hr>
 
 <?php
 	include "config.php";
@@ -110,6 +112,8 @@
 
     $conn->close();
 ?>
+          </div>
+        </div>
       </main>
     </body>
 </html>

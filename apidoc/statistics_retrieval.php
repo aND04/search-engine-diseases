@@ -40,12 +40,14 @@
 						</div>
 				</header>
 				<main>
-					<h1>Statistics - Demo I</h1>
-				    <form action='statistics_retrieval.php' method='get'>
-		            <p> Specialty: <input type='text' name='specialty' /> </p>
-		            <p><input type='submit' value='Submit'/> </p>
-		        </form>
-				    <hr>
+					<div class="row">
+							<div class="col s12">
+									<h1>Statistics - Demo I</h1>
+								    <form action='statistics_retrieval.php' method='get'>
+						            <p> Specialty: <input type='text' name='specialty' /> </p>
+						            <p><input type='submit' value='Submit'/> </p>
+						        </form>
+								    <hr>
 <?php
 include "config.php";
 
@@ -82,6 +84,8 @@ echo "Number of tweets: ". $row['total']. "<br>";
 
 $conn->close();
 ?>
+</div>
+</div>
 </main>
 </body>
 </html>
