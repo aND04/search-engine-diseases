@@ -14,6 +14,7 @@ var metadataResource = "metadata";
 var diseaseResource = "disease";
 var articleResourceFeedbackIncrease = "article/increaseExpFeed";
 var articleRescourceFeedbackDecrease = "article/decreaseExpFeed";
+var articleRescourceFeedback = "article/implicitFeed";
 
 //inicializa o metodo post do botão registar
 var diseaseNameGlob;
@@ -71,7 +72,7 @@ function post() {
             $.each(articleList, function (i, item) {
                 trHTML += '<tr><td><span itemprop="name">' + decodeURIComponent(escape(window.atob(item.title))) +
                     '</span></td><td><span itemprop="about">' + decodeURIComponent(escape(window.atob(item.abstract))) +
-                    '</span></td><td> <span itemprop="url"><a target="_blank" onclick="implicitFeed()" href= https://www.ncbi.nlm.nih.gov/pubmed/' + item.pubmed_id + '> https://www.ncbi.nlm.nih.gov/pubmed/ ' + item.pubmed_id + '</a></td>' +
+                    '</span></td><td> <span itemprop="url"><a target="_blank" onclick="implicitFeed('+item.pubmed_id+')" href= https://www.ncbi.nlm.nih.gov/pubmed/' + item.pubmed_id + '> https://www.ncbi.nlm.nih.gov/pubmed/ ' + item.pubmed_id + '</a></td>' +
                     '<td><span itemprop="datePublished">' + item.pub_Date + '</span></td>' +
                     '<td><span itemprop="contentRating">' + '<ul id=\'thumbs\ \text-left\' style="font-size:40px;width:min-content;alignment:left">' +
                     '<span class=\'up\' title=\'LIKE\' >' +
@@ -277,8 +278,22 @@ function post() {
     })
 }
 
-function implicitFeed(){
-
+function implicitFeed(pubmed_id){
+    $.ajax({
+        url: domain + articleRescourceFeedback + "/" + pubmed_id,
+        data: {
+            pubmed: pubmed_id,
+            diseaseN: diseaseNameGlob,
+            requestType: 'application/json'
+        },
+        method: "GET",
+        success: function (result_for_feedback) {
+            console.log("updated implicit feedback");
+            /*$.each(result_for_feedback, function (i, item) {
+                console.log("status updated!!!" + item);
+            });*/
+        }
+    })
 }
 
 function increaseExpFeed(pubmed_id) {
