@@ -88,8 +88,8 @@ async function relevanceArticle(articleId){
         let similarity = parseFloat(stringUtils.parseDiShInTSVtoValue(tsvSimilarity));
 
         //Relevance feedback
-        let explicitFeedback = Math.floor(Math.random() * 6);
-        let implicitFeedback = Math.floor(Math.random() * 6);
+        let explicitFeedback = 0.25;
+        let implicitFeedback = 0.25;
 
         const relevanceDoesNotExists = await pubmedService.relevanceDoesNotExists(articleId, diseaseId);
             if(relevanceDoesNotExists){
