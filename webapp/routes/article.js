@@ -100,6 +100,38 @@ router.get('/decreaseExpFeed/:pubmedId', function (req, res) {
             }
         }
     })
-})
+});
+
+router.get('/implicitFeed/:pubmedId', function (req, res) {
+    let pubmedID = req.query.pubmed;
+    let diseaseN = req.query.diseaseN;
+    let data = {pubmed: pubmedID, diseaseN: diseaseN};
+    let requestType = req.query.requestType;
+
+    Article.increaseImpFeed(data, function (err, queryRes) {
+        if (err) {
+            var statusCode = 404;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+            res.setHeader('Content-Type', 'application/json');
+            res.json({'error': 'Error getting related articles!'});
+        } else {
+            var reqContentType = requestType;
+            var statusCode = 200;
+            res.status(statusCode);
+            res.statusMessage = StatusMessage.getStatusMessage(statusCode);
+
+            if (reqContentType == 'application/json') {
+                res.setHeader('Content-Type', 'application/json');
+                res.json(queryRes);
+            } else if (reqContentType == 'application/xml') {
+                var xmlResponse = js2xmlparser.parse("article", queryRes);
+                res.setHeader('Content-Type', 'application/xml');
+                res.write(xmlResponse);
+                res.end();
+            }
+        }
+    })
+});
 
 module.exports = router;
