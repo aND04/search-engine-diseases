@@ -1,5 +1,5 @@
 //Routing
-var domain = '/';
+var domain = 'http://appserver.alunos.di.fc.ul.pt/~aw002:3222/';
 var autocomplete = 'disease/getDiseases';
 
 /**

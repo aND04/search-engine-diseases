@@ -4,7 +4,7 @@ $(document).ready(
 
     }
 )
-var domain = '/';
+var domain = 'http://appserver.alunos.di.fc.ul.pt/~aw002:3222/';
 
 //faz ligação ha pasta routes
 var articleResource = "article";
