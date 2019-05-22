@@ -55,5 +55,5 @@ Built using Node.js for the Back-End and Javascript, together with Html and with
     * Go to directory webapp;
     * Do `npm install`;
     * Do `npm start`;
-    * Access `http://appserver.alunos.di.fc.ul.pt/3000`.
+    * Access `http://appserver.alunos.di.fc.ul.pt:3000`.
     
