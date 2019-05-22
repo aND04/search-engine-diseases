@@ -15,11 +15,12 @@ const saveMetadataToDb = async function (wikipageId, uri, image, comment, diseas
     const id = await getWikipageId(wikipageId);
     if (id == -1 ){
         const sanitizedDiseaseName = await stringUtils.sanitize(diseaseName);
+        const sanitizedImage = await stringUtils.sanitize(image);
         const diseaseId = await dbpediaService.getDiseaseId(sanitizedDiseaseName);
         //Check if disease exists in database, otherwise don't add the metadata
         if (diseaseId != -1) {
             const localComment = await stringUtils.encodeBase64(comment);
-            await dbConnector.query(`INSERT INTO dbpedia_metadata_disease(diseaseId, wikipageId, uri, image, comment) VALUES ('${diseaseId}', '${wikipageId}', '${uri}', '${image}', '${localComment}')`);
+            await dbConnector.query(`INSERT INTO dbpedia_metadata_disease(diseaseId, wikipageId, uri, image, comment) VALUES ('${diseaseId}', '${wikipageId}', '${uri}', '${sanitizedImage}', '${localComment}')`);
         }
     } else {
         await setUpdatedAtMetadataValue(id);
