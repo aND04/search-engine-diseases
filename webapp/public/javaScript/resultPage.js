@@ -6,6 +6,7 @@ $(document).ready(
 )
 var domain = 'http://appserver.alunos.di.fc.ul.pt:3000/';
 
+
 //faz ligação ha pasta routes
 var articleResource = "article";
 var tweetResource = "tweet";
@@ -58,7 +59,7 @@ function post() {
                         'title': $(this).find('title').text(),
                         'abstract': $(this).find('abstract').text(),
                         'pubmed_id': $(this).find('pubmed_id').text(),
-                        'pub_Date': new Date($(this).find('pubmed_id').text()).toUTCString()
+                        'pub_Date': new Date($(this).find('pub_Date').text()).toUTCString()
                     });
                 });
                 articleList.shift();
