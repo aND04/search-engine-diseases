@@ -26,7 +26,7 @@
                         <input name="disease_name" id="myInput" type="text" placeholder="What disease are you looking for?" />
                     </div>
                     <div class="input-field second-wrap">
-                        <input id="topn" type="number" name="topn" min="1" placeholder="Top results to show"/>
+                        <input id="topn" type="number" name="topn" min="1"  value="3" placeholder="Top results to show"/>
                     </div>
                     <div class="input-field third-wrap">
                         <button class="btn-search" type="button" value="Disease" onclick="saveParams()">Search</button>
@@ -35,7 +35,7 @@
                 <div class="dropdown">
                     <select class="dropbtn" id="contentType">
                         <option value="" disabled selected hidden>Response Type</option>
-                        <option value="json">JSON</option>
+                        <option selected value="json">JSON</option>
                         <option value="xml">XML</option>
                     </select>
                 </div>
